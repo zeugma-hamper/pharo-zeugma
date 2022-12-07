@@ -1,6 +1,6 @@
 Class {
 	#name : #ZeEvent,
-	#superclass : #Object,
+	#superclass : #Zeubject,
 	#instVars : [
 		'prov',
 		'tstamp',
