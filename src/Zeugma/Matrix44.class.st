@@ -25,6 +25,35 @@ Matrix44 class >> newZero [
 	^ self basicNew alloc16
 ]
 
+{ #category : #arithmetic }
+Matrix44 >> add: b [
+
+	| a arr |
+	a := self.
+	arr :=
+		 {   (a m00 + b m00)  .  (a m01 + b m01)  .  (a m02 + b m02)  .  (a m03 + b m03)
+		  .  (a m10 + b m10)  .  (a m11 + b m11)  .  (a m12 + b m12)  .  (a m13 + b m13)
+		  .  (a m20 + b m20)  .  (a m21 + b m21)  .  (a m22 + b m22)  .  (a m23 + b m23)
+		  .  (a m30 + b m30)  .  (a m31 + b m31)  .  (a m32 + b m32)  .  (a m33 + b m33)
+		 }.
+	^ self class newFrom: arr
+]
+
+{ #category : #arithmetic }
+Matrix44 >> addSelf: b [
+
+	| a arr |
+	a := self.
+	arr :=
+		 {   (a m00 + b m00)  .  (a m01 + b m01)  .  (a m02 + b m02)  .  (a m03 + b m03)
+		  .  (a m10 + b m10)  .  (a m11 + b m11)  .  (a m12 + b m12)  .  (a m13 + b m13)
+		  .  (a m20 + b m20)  .  (a m21 + b m21)  .  (a m22 + b m22)  .  (a m23 + b m23)
+		  .  (a m30 + b m30)  .  (a m31 + b m31)  .  (a m32 + b m32)  .  (a m33 + b m33)
+		 }.
+	self setGutsArray: arr.
+	^ self
+]
+
 { #category : #initialization }
 Matrix44 >> alloc16 [
 
@@ -43,6 +72,96 @@ Matrix44 >> initialize [
 
 	m := FloatArray new: 16.
 	m at: 1 put: 1.0;  at: 6 put: 1.0;  at: 11 put: 1.0;  at: 16 put: 1.0.
+]
+
+{ #category : #transformations }
+Matrix44 >> loadAnisoScaleAtopIdentX: sx Y: sy Z: sz [
+
+	self m00: sx;  m11: sy;  m22: sz.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadAnisoScaleX: sx Y: sy Z: sz [
+
+	self loadIdent;
+		m00: sx;  m11: sy;  m22: sz.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadIdent [
+
+	self setGutsArray: #( 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 ).
+	^ self
+]
+
+{ #category : #transformations }
+Matrix44 >> loadScale: s [
+
+	self loadIdent;
+		m00: s;  m11: s;  m22: s.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadScaleAtopIdent: s [
+
+	self m00: s;  m11: s;  m22: s.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadTranslation: v [
+
+	self loadIdent;
+		m30: v x;  m31: v y;  m32: v z.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadTranslationAtopIdent: v [
+
+	self m30: v x;  m31: v y;  m32: v z.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadTranslationAtopIdentX: tx Y: ty Z: tz [
+
+	self m30: tx;  m31: ty;  m32: tz.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadTranslationX: tx Y: ty Z: tz [
+
+	self loadIdent;
+		m30: tx;  m31: ty;  m32: tz.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadZero [
+
+	self setGutsArray: #( 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ).
+	^ self
 ]
 
 { #category : #'single-element' }
@@ -230,7 +349,7 @@ Matrix44 >> mult: b [
 		  . (a m30 * b m01) + (a m31 * b m11) + (a m32 * b m21) + (a m33 * b m31)
 		  . (a m30 * b m02) + (a m31 * b m12) + (a m32 * b m22) + (a m33 * b m32)
 		  . (a m30 * b m03) + (a m31 * b m13) + (a m32 * b m23) + (a m33 * b m33)
-		}
+		 }
 ]
 
 { #category : #arithmetic }
@@ -258,7 +377,7 @@ Matrix44 >> multSelf: b [
 		  . (a m30 * b m01) + (a m31 * b m11) + (a m32 * b m21) + (a m33 * b m31)
 		  . (a m30 * b m02) + (a m31 * b m12) + (a m32 * b m22) + (a m33 * b m32)
 		  . (a m30 * b m03) + (a m31 * b m13) + (a m32 * b m23) + (a m33 * b m33)
-		}.
+		 }.
 	self setGutsArray: mm.
 	^ self
 ]
@@ -271,10 +390,30 @@ Matrix44 >> preMult: b [
 
 { #category : #arithmetic }
 Matrix44 >> preMultSelf: b [
+
 	| mm |
 	mm := b mult: self.
 	self setGutsArray: mm gutsArray.
 	^ self.
+]
+
+{ #category : #arithmetic }
+Matrix44 >> scale: s [
+
+	| arr |
+	arr := FloatArray basicNew: 16.
+	m withIndexDo: [ :val :ind | arr at: ind put: s * val ].
+	^ self class newFrom: arr
+]
+
+{ #category : #arithmetic }
+Matrix44 >> scaleSelf: s [
+
+	| arr |
+	arr := FloatArray basicNew: 16.
+	m withIndexDo: [ :val :ind | arr at: ind put: s * val ].
+	self setGutsArray: arr.
+	^ self
 ]
 
 { #category : #accessing }
@@ -285,12 +424,68 @@ Matrix44 >> setGutsArray: arr [
 ]
 
 { #category : #arithmetic }
+Matrix44 >> sub: b [
+
+	| a arr |
+	a := self.
+	arr :=
+		 {   (a m00 - b m00)  .  (a m01 - b m01)  .  (a m02 - b m02)  .  (a m03 - b m03)
+		  .  (a m10 - b m10)  .  (a m11 - b m11)  .  (a m12 - b m12)  .  (a m13 - b m13)
+		  .  (a m20 - b m20)  .  (a m21 - b m21)  .  (a m22 - b m22)  .  (a m23 - b m23)
+		  .  (a m30 - b m30)  .  (a m31 - b m31)  .  (a m32 - b m32)  .  (a m33 - b m33)
+		 }.
+	^ self class newFrom: arr
+]
+
+{ #category : #arithmetic }
+Matrix44 >> subSelf: b [
+
+	| a arr |
+	a := self.
+	arr :=
+		 {   (a m00 - b m00)  .  (a m01 - b m01)  .  (a m02 - b m02)  .  (a m03 - b m03)
+		  .  (a m10 - b m10)  .  (a m11 - b m11)  .  (a m12 - b m12)  .  (a m13 - b m13)
+		  .  (a m20 - b m20)  .  (a m21 - b m21)  .  (a m22 - b m22)  .  (a m23 - b m23)
+		  .  (a m30 - b m30)  .  (a m31 - b m31)  .  (a m32 - b m32)  .  (a m33 - b m33)
+		 }.
+	self setGutsArray: arr.
+	^ self
+]
+
+{ #category : #arithmetic }
+Matrix44 >> transpose [
+
+	| a arr |
+	a := self.
+	arr := {   a m00  .  a m10  .  a m20  .  a m30
+			  .  a m01  .  a m11  .  a m21  .  a m31
+			  .  a m02  .  a m12  .  a m22  .  a m32
+			  .  a m03  .  a m13  .  a m23  .  a m33
+			 }.
+	^ self class newFrom: arr
+]
+
+{ #category : #arithmetic }
+Matrix44 >> transposeSelf [
+
+	| a arr |
+	a := self.
+	arr := {   a m00  .  a m10  .  a m20  .  a m30
+			  .  a m01  .  a m11  .  a m21  .  a m31
+			  .  a m02  .  a m12  .  a m22  .  a m32
+			  .  a m03  .  a m13  .  a m23  .  a m33
+			 }.
+	self setGutsArray: arr.
+	^ self
+]
+
+{ #category : #arithmetic }
 Matrix44 >> xformVect: v [
 
-	| w |
-	w := self.
-	^ Vect newx: (w m00 * v x) + (w m10 * v y) + (w m20 * v z) + w m30
-				y: (w m01 * v x) + (w m11 * v y) + (w m21 * v z) + w m31
-				z: (w m02 * v x) + (w m12 * v y) + (w m22 * v z) + w m32
+	| a |
+	a := self.
+	^ Vect newx: (a m00 * v x) + (a m10 * v y) + (a m20 * v z) + a m30
+				y: (a m01 * v x) + (a m11 * v y) + (a m21 * v z) + a m31
+				z: (a m02 * v x) + (a m12 * v y) + (a m22 * v z) + a m32
 
 ]
