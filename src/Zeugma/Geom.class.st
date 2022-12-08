@@ -8,9 +8,9 @@ Class {
 Geom class >> intersectLine: lpt dir: dir withPlane: cnt norm: nrm [
 			
 	| t |
-	t := dir <> nrm.
+	t := dir scp: nrm.
 	t ~= 0 ifTrue: [
-		t := ((cnt - lpt) <> nrm) / t.
+		t := ((cnt - lpt) scp: nrm) / t.
 		^ lpt + (dir scaleBy: t).
 	].
 	^ nil
@@ -20,9 +20,9 @@ Geom class >> intersectLine: lpt dir: dir withPlane: cnt norm: nrm [
 Geom class >> intersectRay: frm aim: aim withPlane: cnt norm: nrm [
 			
 	| t |
-	t := aim <> nrm.
+	t := aim scp: nrm.
 	t ~= 0 ifTrue: [
-		t := ((frm - cnt) <> nrm) / t.
+		t := ((cnt - frm) scp: nrm) / t.
 		(t >= 0.0) ifTrue: [ ^ frm + (aim scaleBy: t) ].
 	].
 	^ nil
@@ -37,11 +37,11 @@ Geom class >> intersectRay: frm aim: aim withRect: cnt over: ovr up: upp wid: wi
 	pee ifNil: [ ^ nil ].
 	p := pee - cnt.
 
-	t := 2.0 * (p <> ovr).
+	t := 2.0 * (p scp: ovr).
 	(t < (0-wid)  or: [ t > wid ])
 		ifTrue: [ ^ nil ].
 
-	t := 2.0 * (p <> upp).
+	t := 2.0 * (p scp: upp).
 	(t < (0-hei)  or: [ t > hei ])
 		ifTrue: [ ^ nil ].
 
@@ -53,7 +53,7 @@ Geom class >> projectPoint: pnt ontoLine: lpt dir: dir [
 			
 	| d prj |
 	d := dir normed.
-	prj := lpt + (d scaleBy: (d <> (pnt - lpt))).
+	prj := lpt + (d scaleBy: (d scp: (pnt - lpt))).
 	^ prj
 ]
 
@@ -62,6 +62,6 @@ Geom class >> projectPoint: pnt ontoPlane: cnt norm: nrm [
 			
 	| n prj |
 	n := nrm normed.
-	prj := pnt - (n scaleBy: (n <> (pnt - cnt))).
+	prj := pnt - (n scaleBy: (n scp: (pnt - cnt))).
 	^ prj
 ]

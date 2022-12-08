@@ -9,7 +9,7 @@ Class {
 		'hei',
 		'layers'
 	],
-	#category : #'Zeugma-SpaceAndGeom'
+	#category : #'Zeugma-SpaceAndStructure'
 }
 
 { #category : #'hit-testing' }
@@ -41,7 +41,7 @@ PlatonicMaes class >> closestAmongMaeses: maesColl fromRay: frm aim: aim restric
 		| d hit |
 		hit := strict
 			ifTrue: [ Geom intersectRay: frm aim: aim withRect: m loc
-									over: m over up: m up wid: m wid hei: m hei ]
+									over: m over up: m up wid: m width hei: m height ]
 			ifFalse: [ Geom intersectRay: frm aim: aim withPlane: m loc norm: (m over cross: m up) ].
 		hit ifNotNil: [
 			d := (hit - frm) normSquared.
@@ -54,16 +54,23 @@ PlatonicMaes class >> closestAmongMaeses: maesColl fromRay: frm aim: aim restric
 	^ { clsMaes . clsHit }
 ]
 
-{ #category : #accessing }
-PlatonicMaes >> hei [
+{ #category : #'instance creation' }
+PlatonicMaes class >> newFromDict: map [
 
-	^ hei
+	^ self new
+		setName: (map at: #name);
+		setLoc: (Vect new: (map at: #location));
+		setOver: (Vect new: (map at: #over));
+		setUp: (Vect new: (map at: #up));
+		setWidth: (map at: #width);
+		setHeight: (map at: #height);
+		itself
 ]
 
 { #category : #accessing }
-PlatonicMaes >> hei: h [
+PlatonicMaes >> height [
 
-	hei := h
+	^ hei
 ]
 
 { #category : #accessing }
@@ -79,21 +86,39 @@ PlatonicMaes >> loc [
 ]
 
 { #category : #accessing }
-PlatonicMaes >> loc: aVect [
-
-	loc := aVect
-]
-
-{ #category : #accessing }
 PlatonicMaes >> over [
 
 	^ ovr
 ]
 
 { #category : #accessing }
-PlatonicMaes >> over: aVect [
+PlatonicMaes >> setHeight: h [
+
+	hei := h
+]
+
+{ #category : #accessing }
+PlatonicMaes >> setLoc: aVect [
+
+	loc := aVect
+]
+
+{ #category : #accessing }
+PlatonicMaes >> setOver: aVect [
 
 	ovr := aVect
+]
+
+{ #category : #accessing }
+PlatonicMaes >> setUp: aVect [
+
+	upp := aVect
+]
+
+{ #category : #accessing }
+PlatonicMaes >> setWidth: w [
+
+	wid := w
 ]
 
 { #category : #accessing }
@@ -103,19 +128,7 @@ PlatonicMaes >> up [
 ]
 
 { #category : #accessing }
-PlatonicMaes >> up: aVect [
-
-	upp := aVect
-]
-
-{ #category : #accessing }
-PlatonicMaes >> wid [
+PlatonicMaes >> width [
 
 	^ wid
-]
-
-{ #category : #accessing }
-PlatonicMaes >> wid: w [
-
-	wid := w
 ]

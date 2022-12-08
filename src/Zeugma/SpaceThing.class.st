@@ -4,5 +4,5 @@ Class {
 	#instVars : [
 		'grPile'
 	],
-	#category : #'Zeugma-SpaceAndGeom'
+	#category : #'Zeugma-SpaceAndStructure'
 }
