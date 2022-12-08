@@ -1,0 +1,296 @@
+Class {
+	#name : #Matrix44,
+	#superclass : #Object,
+	#instVars : [
+		'm'
+	],
+	#category : #'Zeugma-Foundation'
+}
+
+{ #category : #'instance creation' }
+Matrix44 class >> newFrom: arr [
+
+	^ self basicNew setGutsArray: arr
+]
+
+{ #category : #'instance creation' }
+Matrix44 class >> newIdent [
+
+	^ self new
+]
+
+{ #category : #'instance creation' }
+Matrix44 class >> newZero [
+
+	^ self basicNew alloc16
+]
+
+{ #category : #initialization }
+Matrix44 >> alloc16 [
+
+	m := FloatArray new: 16.
+	^ self
+]
+
+{ #category : #accessing }
+Matrix44 >> gutsArray [
+
+	^ m
+]
+
+{ #category : #initialization }
+Matrix44 >> initialize [
+
+	m := FloatArray new: 16.
+	m at: 1 put: 1.0;  at: 6 put: 1.0;  at: 11 put: 1.0;  at: 16 put: 1.0.
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m00 [
+	^ m at: 1
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m00: f [
+	^ m at: 1 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m01 [
+	^ m at: 2
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m01: f [
+	^ m at: 2 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m02 [
+	^ m at: 3
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m02: f [
+	^ m at: 3 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m03 [
+	^ m at: 4
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m03: f [
+	^ m at: 4 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m10 [
+	^ m at: 5
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m10: f [
+	^ m at: 5 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m11 [
+	^ m at: 6
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m11: f [
+	^ m at: 6 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m12 [
+	^ m at: 7
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m12: f [
+	^ m at: 7 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m13 [
+	^ m at: 8
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m13: f [
+	^ m at: 8 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m20 [
+	^ m at: 9
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m20: f [
+	^ m at: 9 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m21 [
+	^ m at: 10
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m21: f [
+	^ m at: 10 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m22 [
+	^ m at: 11
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m22: f [
+	^ m at: 11 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m23 [
+	^ m at: 12
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m23: f [
+	^ m at: 12 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m30 [
+	^ m at: 13
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m30: f [
+	^ m at: 13 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m31 [
+	^ m at: 14
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m31: f [
+	^ m at: 14 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m32 [
+	^ m at: 15
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m32: f [
+	^ m at: 15 put: f
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m33 [
+	^ m at: 16
+]
+
+{ #category : #'single-element' }
+Matrix44 >> m33: f [
+	^ m at: 16 put: f
+]
+
+{ #category : #arithmetic }
+Matrix44 >> mult: b [
+
+	| a |
+	a := self.
+	^ self class newFrom:
+		 {  (a m00 * b m00) + (a m01 * b m10) + (a m02 * b m20) + (a m03 * b m30)
+		  . (a m00 * b m01) + (a m01 * b m11) + (a m02 * b m21) + (a m03 * b m31)
+		  . (a m00 * b m02) + (a m01 * b m12) + (a m02 * b m22) + (a m03 * b m32)
+		  . (a m00 * b m03) + (a m01 * b m13) + (a m02 * b m23) + (a m03 * b m33)
+
+		  . (a m10 * b m00) + (a m11 * b m10) + (a m12 * b m20) + (a m13 * b m30)
+		  . (a m10 * b m01) + (a m11 * b m11) + (a m12 * b m21) + (a m13 * b m31)
+		  . (a m10 * b m02) + (a m11 * b m12) + (a m12 * b m22) + (a m13 * b m32)
+		  . (a m10 * b m03) + (a m11 * b m13) + (a m12 * b m23) + (a m13 * b m33)
+
+		  . (a m20 * b m00) + (a m21 * b m10) + (a m22 * b m20) + (a m23 * b m30)
+		  . (a m20 * b m01) + (a m21 * b m11) + (a m22 * b m21) + (a m23 * b m31)
+		  . (a m20 * b m02) + (a m21 * b m12) + (a m22 * b m22) + (a m23 * b m32)
+		  . (a m20 * b m03) + (a m21 * b m13) + (a m22 * b m23) + (a m23 * b m33)
+
+		  . (a m30 * b m00) + (a m31 * b m10) + (a m32 * b m20) + (a m33 * b m30)
+		  . (a m30 * b m01) + (a m31 * b m11) + (a m32 * b m21) + (a m33 * b m31)
+		  . (a m30 * b m02) + (a m31 * b m12) + (a m32 * b m22) + (a m33 * b m32)
+		  . (a m30 * b m03) + (a m31 * b m13) + (a m32 * b m23) + (a m33 * b m33)
+		}
+]
+
+{ #category : #arithmetic }
+Matrix44 >> multSelf: b [
+
+	| a mm |
+	a := self.
+	mm :=
+		 {  (a m00 * b m00) + (a m01 * b m10) + (a m02 * b m20) + (a m03 * b m30)
+		  . (a m00 * b m01) + (a m01 * b m11) + (a m02 * b m21) + (a m03 * b m31)
+		  . (a m00 * b m02) + (a m01 * b m12) + (a m02 * b m22) + (a m03 * b m32)
+		  . (a m00 * b m03) + (a m01 * b m13) + (a m02 * b m23) + (a m03 * b m33)
+
+		  . (a m10 * b m00) + (a m11 * b m10) + (a m12 * b m20) + (a m13 * b m30)
+		  . (a m10 * b m01) + (a m11 * b m11) + (a m12 * b m21) + (a m13 * b m31)
+		  . (a m10 * b m02) + (a m11 * b m12) + (a m12 * b m22) + (a m13 * b m32)
+		  . (a m10 * b m03) + (a m11 * b m13) + (a m12 * b m23) + (a m13 * b m33)
+
+		  . (a m20 * b m00) + (a m21 * b m10) + (a m22 * b m20) + (a m23 * b m30)
+		  . (a m20 * b m01) + (a m21 * b m11) + (a m22 * b m21) + (a m23 * b m31)
+		  . (a m20 * b m02) + (a m21 * b m12) + (a m22 * b m22) + (a m23 * b m32)
+		  . (a m20 * b m03) + (a m21 * b m13) + (a m22 * b m23) + (a m23 * b m33)
+
+		  . (a m30 * b m00) + (a m31 * b m10) + (a m32 * b m20) + (a m33 * b m30)
+		  . (a m30 * b m01) + (a m31 * b m11) + (a m32 * b m21) + (a m33 * b m31)
+		  . (a m30 * b m02) + (a m31 * b m12) + (a m32 * b m22) + (a m33 * b m32)
+		  . (a m30 * b m03) + (a m31 * b m13) + (a m32 * b m23) + (a m33 * b m33)
+		}.
+	self setGutsArray: mm.
+	^ self
+]
+
+{ #category : #arithmetic }
+Matrix44 >> preMult: b [
+
+	^ b mult: self
+]
+
+{ #category : #arithmetic }
+Matrix44 >> preMultSelf: b [
+	| mm |
+	mm := b mult: self.
+	self setGutsArray: mm gutsArray.
+	^ self.
+]
+
+{ #category : #accessing }
+Matrix44 >> setGutsArray: arr [
+
+	m := arr asFloatArray.
+	^ self
+]
+
+{ #category : #arithmetic }
+Matrix44 >> xformVect: v [
+
+	| w |
+	w := self.
+	^ Vect newx: (w m00 * v x) + (w m10 * v y) + (w m20 * v z) + w m30
+				y: (w m01 * v x) + (w m11 * v y) + (w m21 * v z) + w m31
+				z: (w m02 * v x) + (w m12 * v y) + (w m22 * v z) + w m32
+
+]
