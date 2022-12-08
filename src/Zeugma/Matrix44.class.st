@@ -25,6 +25,66 @@ Matrix44 class >> newZero [
 	^ self basicNew alloc16
 ]
 
+{ #category : #transformations }
+Matrix44 class >> rotationAxis: axs angle: ang [
+
+	^ self basicNew loadRotationAxis: axs angle: ang
+]
+
+{ #category : #transformations }
+Matrix44 class >> rotationAxis: axs angle: ang about: cnt [
+
+	^ self basicNew loadRotationAxis: axs angle: ang about: cnt
+]
+
+{ #category : #transformations }
+Matrix44 class >> rotationNormedAxis: axs angle: ang [
+
+	^ self basicNew loadRotationNormedAxis: axs angle: ang
+]
+
+{ #category : #transformations }
+Matrix44 class >> rotationNormedAxis: axs angle: ang about: cnt [
+
+	^ self basicNew loadRotationNormedAxis: axs angle: ang about: cnt
+]
+
+{ #category : #transformations }
+Matrix44 class >> scale: s [
+
+	^ self basicNew loadScale: s
+]
+
+{ #category : #transformations }
+Matrix44 class >> scale: s about: cntr [
+
+	^ self basicNew loadScale: s about: cntr
+]
+
+{ #category : #transformations }
+Matrix44 class >> scaleX: sx Y: sy Z: sz [
+
+	^ self basicNew loadScaleX: sx Y: sy Z: sz
+]
+
+{ #category : #transformations }
+Matrix44 class >> scaleX: sx Y: sy Z: sz about: cntr [
+
+	^ self basicNew loadScaleX: sx Y: sy Z: sz about: cntr
+]
+
+{ #category : #transformations }
+Matrix44 class >> translation: v [
+
+	^ self basicNew loadTranslation: v
+]
+
+{ #category : #transformations }
+Matrix44 class >> translationX: tx Y: ty Z: tz [
+
+	^ self basicNew loadTranslationX: tx Y: ty Z: tz
+]
+
 { #category : #arithmetic }
 Matrix44 >> add: b [
 
@@ -40,7 +100,7 @@ Matrix44 >> add: b [
 ]
 
 { #category : #arithmetic }
-Matrix44 >> addSelf: b [
+Matrix44 >> addAccum: b [
 
 	| a arr |
 	a := self.
@@ -61,6 +121,18 @@ Matrix44 >> alloc16 [
 	^ self
 ]
 
+{ #category : #copying }
+Matrix44 >> copy [
+
+	^ self class newFrom: m copy
+]
+
+{ #category : #copying }
+Matrix44 >> dup [
+
+	^ self class newFrom: m copy
+]
+
 { #category : #accessing }
 Matrix44 >> gutsArray [
 
@@ -74,8 +146,90 @@ Matrix44 >> initialize [
 	m at: 1 put: 1.0;  at: 6 put: 1.0;  at: 11 put: 1.0;  at: 16 put: 1.0.
 ]
 
-{ #category : #transformations }
-Matrix44 >> loadAnisoScaleAtopIdentX: sx Y: sy Z: sz [
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentRotationAxis: axs angle: ang [
+
+	^ self loadAtopIdentRotationNormedAxis: (axs normed) angle: ang
+]
+
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentRotationAxis: axs angle: ang about: cnt [
+	| emm |
+
+	self loadAtopIdentTranslation: cnt neg.
+	emm := Matrix44 rotationAxis: axs angle: ang.
+	self multAccum: emm.
+	emm := Matrix44 translation: cnt.
+	^ self
+]
+
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentRotationNormedAxis: axs angle: ang [
+
+	| co si omc t1 t2 |
+
+	((ang isZero) or: [ axs isZero ])
+		ifTrue: [ ^ self loadIdent ].
+	
+	co := ang cos.  si := ang sin.  omc := 1 - co.
+
+	self m00: co + (axs x squared * omc).
+	self m11: co + (axs y squared * omc).
+	self m22: co + (axs z squared * omc).
+
+	t1 := axs x * axs y * omc.
+	t2 := axs z * si.
+	self m10: t1 - t2.
+	self m01: t1 + t2.
+
+	t1 := axs x * axs z * omc.
+	t2 := axs y * si.
+	self m20: t1 + t2.
+	self m02: t1 - t2.
+
+	t1 := axs y * axs z * omc.
+	self m21: t1 - t2.
+	self m12: t1 + t2.
+
+	^ self
+]
+
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentRotationNormedAxis: axs angle: ang about: cnt [
+	| emm |
+
+	self loadAtopIdentTranslation: cnt neg.
+	emm := Matrix44 rotationNormedAxis: axs angle: ang.
+	self multAccum: emm.
+	emm := Matrix44 translation: cnt.
+	^ self
+]
+
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentScale: s [
+
+	self m00: s;  m11: s;  m22: s.
+	^ self
+
+
+]
+
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentScale: s about: cnt [
+	| t |
+	t := 1 - s.
+
+	self m00: s;  m11: s;  m22: s.
+	self m30: cnt x * t.
+	self m31: cnt y * t.
+	self m32: cnt z * t.
+	^ self
+
+
+]
+
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentScaleX: sx Y: sy Z: sz [
 
 	self m00: sx;  m11: sy;  m22: sz.
 	^ self
@@ -83,20 +237,101 @@ Matrix44 >> loadAnisoScaleAtopIdentX: sx Y: sy Z: sz [
 
 ]
 
-{ #category : #transformations }
-Matrix44 >> loadAnisoScaleX: sx Y: sy Z: sz [
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentScaleX: sx Y: sy Z: sz about: cnt [
 
-	self loadIdent;
-		m00: sx;  m11: sy;  m22: sz.
+	self m00: sx;  m11: sy;  m22: sz.
+	self m30: cnt x * (1 - sx).
+	self m31: cnt y * (1 - sy).
+	self m32: cnt z * (1 - sz).
 	^ self
 
 
 ]
 
-{ #category : #transformations }
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentTranslation: v [
+
+	self m30: v x;  m31: v y;  m32: v z.
+	^ self
+
+
+]
+
+{ #category : #'transformations-preident' }
+Matrix44 >> loadAtopIdentTranslationX: tx Y: ty Z: tz [
+
+	self m30: tx;  m31: ty;  m32: tz.
+	^ self
+
+
+]
+
+{ #category : #'ident-and-zero' }
 Matrix44 >> loadIdent [
 
 	self setGutsArray: #( 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 ).
+	^ self
+]
+
+{ #category : #transformations }
+Matrix44 >> loadRotationAxis: axs angle: ang [
+
+	^ self loadRotationNormedAxis: (axs normed) angle: ang
+]
+
+{ #category : #transformations }
+Matrix44 >> loadRotationAxis: axs angle: ang about: cnt [
+	| emm |
+
+	self loadTranslation: cnt neg.
+	emm := Matrix44 rotationAxis: axs angle: ang.
+	self multAccum: emm.
+	emm := Matrix44 translation: cnt.
+	^ self
+]
+
+{ #category : #transformations }
+Matrix44 >> loadRotationNormedAxis: axs angle: ang [
+
+	| co si omc t1 t2 a00 a11 a22 a10 a01 a20 a02 a21 a12 |
+
+	((ang isZero) or: [ axs isZero ])
+		ifTrue: [ ^ self loadIdent ].
+	
+	co := ang cos.  si := ang sin.  omc := 1 - co.
+
+	a00 := co + (axs x squared * omc).
+	a11 := co + (axs y squared * omc).
+	a22 := co + (axs z squared * omc).
+
+	t1 := axs x * axs y * omc.
+	t2 := axs z * si.
+	a10 := t1 - t2.  a01 := t1 + t2.
+
+	t1 := axs x * axs z * omc.
+	t2 := axs y * si.
+	a20 := t1 + t2.  a02 := t1 - t2.
+
+	t1 := axs y * axs z * omc.
+	a21 := t1 - t2.  a12 := t1 + t2.
+
+	^ self setGutsArray:
+		{ a00 . a01 . a02 . 0.0 .
+		  a10 . a11 . a12 . 0.0 .
+		  a20 . a21 . a22 . 0.0 .
+		  0.0 . 0.0 . 0.0 . 1.0
+		}
+]
+
+{ #category : #transformations }
+Matrix44 >> loadRotationNormedAxis: axs angle: ang about: cnt [
+	| emm |
+
+	self loadTranslation: cnt neg.
+	emm := Matrix44 rotationNormedAxis: axs angle: ang.
+	self multAccum: emm.
+	emm := Matrix44 translation: cnt.
 	^ self
 ]
 
@@ -111,9 +346,38 @@ Matrix44 >> loadScale: s [
 ]
 
 { #category : #transformations }
-Matrix44 >> loadScaleAtopIdent: s [
+Matrix44 >> loadScale: s about: cnt [
+	| t |
+	t := 1 - s.
 
+	self loadIdent.
 	self m00: s;  m11: s;  m22: s.
+	self m30: cnt x * t.
+	self m31: cnt y * t.
+	self m32: cnt z * t.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadScaleX: sx Y: sy Z: sz [
+
+	self loadIdent;
+		m00: sx;  m11: sy;  m22: sz.
+	^ self
+
+
+]
+
+{ #category : #transformations }
+Matrix44 >> loadScaleX: sx Y: sy Z: sz about: cnt [
+
+	self loadIdent.
+	self m00: sx;  m11: sy;  m22: sz.
+	self m30: cnt x * (1 - sx).
+	self m31: cnt y * (1 - sy).
+	self m32: cnt z * (1 - sz).
 	^ self
 
 
@@ -130,24 +394,6 @@ Matrix44 >> loadTranslation: v [
 ]
 
 { #category : #transformations }
-Matrix44 >> loadTranslationAtopIdent: v [
-
-	self m30: v x;  m31: v y;  m32: v z.
-	^ self
-
-
-]
-
-{ #category : #transformations }
-Matrix44 >> loadTranslationAtopIdentX: tx Y: ty Z: tz [
-
-	self m30: tx;  m31: ty;  m32: tz.
-	^ self
-
-
-]
-
-{ #category : #transformations }
 Matrix44 >> loadTranslationX: tx Y: ty Z: tz [
 
 	self loadIdent;
@@ -157,7 +403,7 @@ Matrix44 >> loadTranslationX: tx Y: ty Z: tz [
 
 ]
 
-{ #category : #transformations }
+{ #category : #'ident-and-zero' }
 Matrix44 >> loadZero [
 
 	self setGutsArray: #( 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ).
@@ -353,7 +599,7 @@ Matrix44 >> mult: b [
 ]
 
 { #category : #arithmetic }
-Matrix44 >> multSelf: b [
+Matrix44 >> multAccum: b [
 
 	| a mm |
 	a := self.
@@ -389,7 +635,7 @@ Matrix44 >> preMult: b [
 ]
 
 { #category : #arithmetic }
-Matrix44 >> preMultSelf: b [
+Matrix44 >> preMultAccum: b [
 
 	| mm |
 	mm := b mult: self.
@@ -407,7 +653,7 @@ Matrix44 >> scale: s [
 ]
 
 { #category : #arithmetic }
-Matrix44 >> scaleSelf: s [
+Matrix44 >> scaleAccum: s [
 
 	| arr |
 	arr := FloatArray basicNew: 16.
@@ -438,7 +684,7 @@ Matrix44 >> sub: b [
 ]
 
 { #category : #arithmetic }
-Matrix44 >> subSelf: b [
+Matrix44 >> subAccum: b [
 
 	| a arr |
 	a := self.
@@ -466,7 +712,7 @@ Matrix44 >> transpose [
 ]
 
 { #category : #arithmetic }
-Matrix44 >> transposeSelf [
+Matrix44 >> transposeAccum [
 
 	| a arr |
 	a := self.
