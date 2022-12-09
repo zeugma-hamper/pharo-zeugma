@@ -9,5 +9,5 @@ Class {
 	#classVars : [
 		'globalIronLungs'
 	],
-	#category : #'Zeugma-Foundation'
+	#category : #'Zeugma-TemporalStructure'
 }

@@ -1,6 +1,6 @@
 Class {
-	#name : #PlasmaCatchBasin,
-	#superclass : #CatchBasin,
+	#name : #PlasmaCommsSump,
+	#superclass : #CommsSump,
 	#instVars : [
 		'pool'
 	],

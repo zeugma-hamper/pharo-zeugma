@@ -58,6 +58,12 @@ Zeubject >> setName: nm [
 ]
 
 { #category : #sac }
+Zeubject >> travail: ratch atTime: thyme [
+
+	^ self
+]
+
+{ #category : #sac }
 Zeubject >> unsecuredSac [
 
 	^ sac

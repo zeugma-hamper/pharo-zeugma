@@ -1,5 +1,5 @@
 Class {
-	#name : #CatchBasin,
+	#name : #CommsSump,
 	#superclass : #Zeubject,
 	#instVars : [
 		'slctr_by_address',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'processing-and-dispatch' }
-CatchBasin >> dispatch: pyld viaAddr: addr [
+CommsSump >> dispatch: pyld viaAddr: addr [
 	| sel aqs |
 
 	sel := slctr_by_address at: addr ifAbsent: [ ^ self ].
@@ -20,8 +20,20 @@ CatchBasin >> dispatch: pyld viaAddr: addr [
 	].
 ]
 
+{ #category : #accessing }
+CommsSump >> forAddress: addr setRawExtractor: rwex [
+
+	rawex_by_address at: addr put: rwex.
+]
+
+{ #category : #accessing }
+CommsSump >> forAddress: addr setSelector: sel [
+
+	slctr_by_address at: addr put: sel.
+]
+
 { #category : #initialization }
-CatchBasin >> initialize [
+CommsSump >> initialize [
 
 	super initialize.
 	ducts_by_address := Dictionary new.
@@ -30,13 +42,13 @@ CatchBasin >> initialize [
 ]
 
 { #category : #'processing-and-dispatch' }
-CatchBasin >> processSump [
+CommsSump >> processSump [
 
 	self subclassResponsibility
 ]
 
 { #category : #'processing-and-dispatch' }
-CatchBasin >> rawExtractionViaAddr: addr payload: pyld [
+CommsSump >> rawExtractionViaAddr: addr payload: pyld [
 
 	(rawex_by_address includesKey: addr)
 		ifTrue: [ ^ (rawex_by_address at: addr) value: pyld ].
