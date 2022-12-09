@@ -7,3 +7,7 @@ Class {
 	],
 	#category : #'Zeugma-Events'
 }
+
+{ #category : #'event-distribution' }
+EventAqueduct >> drainReservoir [
+]

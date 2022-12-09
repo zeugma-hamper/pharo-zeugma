@@ -7,5 +7,5 @@ Class {
 		'adjIro',
 		'cumuAdjc'
 	],
-	#category : #'Zeugma-SpaceAndStructure'
+	#category : #'Zeugma-SpatialStructure'
 }
