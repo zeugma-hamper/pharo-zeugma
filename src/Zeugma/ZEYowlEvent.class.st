@@ -10,8 +10,8 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
-{ #category : #initialization }
-ZEYowlEvent class >> initialize [
+{ #category : #'event-routing' }
+ZEYowlEvent class >> classSideDeliverySelector [
 
-	deliv_selector := #zeYowl:.
+	^ #zeYowl:
 ]

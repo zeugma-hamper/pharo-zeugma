@@ -4,8 +4,8 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
-{ #category : #initialization }
-ZEYowlAppearEvent class >> initialize [
+{ #category : #'event-routing' }
+ZEYowlAppearEvent class >> classSideDeliverySelector [
 
-	deliv_selector := #zeYowlAppear:.
+	^ #zeYowlAppear:
 ]

@@ -4,8 +4,8 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
-{ #category : #initialization }
-ZESpatialMoveEvent class >> initialize [
+{ #category : #'event-routing' }
+ZESpatialMoveEvent class >> classSideDeliverySelector [
 
-	deliv_selector := #zeSpatialMove:.
+	^ #zeSpatialMove:
 ]

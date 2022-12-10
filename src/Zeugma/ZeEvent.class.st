@@ -16,13 +16,7 @@ Class {
 { #category : #'event-routing' }
 ZeEvent class >> classSideDeliverySelector [
 
-	^ deliv_selector
-]
-
-{ #category : #initialization }
-ZeEvent class >> initialize [
-
-	deliv_selector := #ze:.
+	^ #ze:
 ]
 
 { #category : #'event-routing' }

@@ -8,8 +8,8 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
-{ #category : #initialization }
-ZESpatialCaressEvent class >> initialize [
+{ #category : #'event-routing' }
+ZESpatialCaressEvent class >> classSideDeliverySelector [
 
-	deliv_selector := #zeSpatialCaress:.
+	^ #zeSpatialCaress:
 ]

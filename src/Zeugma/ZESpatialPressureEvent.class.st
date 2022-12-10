@@ -8,8 +8,8 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
-{ #category : #initialization }
-ZESpatialPressureEvent class >> initialize [
+{ #category : #'event-routing' }
+ZESpatialPressureEvent class >> classSideDeliverySelector [
 
-	deliv_selector := #zeSpatialPressure:.
+	^ #zeSpatialPressure:
 ]

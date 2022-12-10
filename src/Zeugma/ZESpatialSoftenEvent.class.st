@@ -4,8 +4,8 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
-{ #category : #initialization }
-ZESpatialSoftenEvent class >> initialize [
+{ #category : #'event-routing' }
+ZESpatialSoftenEvent class >> classSideDeliverySelector [
 
-	deliv_selector := #zeSpatialSoften:.
+	^ #zeSpatialSoften:
 ]

@@ -12,10 +12,10 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
-{ #category : #initialization }
-ZESpatialEvent class >> initialize [
+{ #category : #'event-routing' }
+ZESpatialEvent class >> classSideDeliverySelector [
 
-	deliv_selector := #zeSpatial:.
+	^ #zeSpatial:
 ]
 
 { #category : #accessing }
