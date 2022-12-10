@@ -1,11 +1,11 @@
 Class {
 	#name : #OSCWandsSump,
-	#superclass : #OSCCommsSump,
+	#superclass : #OSCSump,
 	#instVars : [
 		'point_mat',
 		'direc_mat'
 	],
-	#category : #'Zeugma-Events'
+	#category : #'Zeugma-EventImport'
 }
 
 { #category : #initialization }

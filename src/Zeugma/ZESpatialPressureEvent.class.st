@@ -7,3 +7,9 @@ Class {
 	],
 	#category : #'Zeugma-Events'
 }
+
+{ #category : #initialization }
+ZESpatialPressureEvent class >> initialize [
+
+	deliv_selector := #zeSpatialPressure:.
+]

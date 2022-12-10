@@ -1,7 +1,7 @@
 Class {
 	#name : #SpatialAqueduct,
 	#superclass : #EventAqueduct,
-	#category : #'Zeugma-Events'
+	#category : #'Zeugma-EventTransport'
 }
 
 { #category : #configuration }

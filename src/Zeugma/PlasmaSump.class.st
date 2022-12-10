@@ -1,8 +1,8 @@
 Class {
-	#name : #PlasmaCommsSump,
+	#name : #PlasmaSump,
 	#superclass : #CommsSump,
 	#instVars : [
 		'pool'
 	],
-	#category : #'Zeugma-Events'
+	#category : #'Zeugma-EventImport'
 }

@@ -1,21 +1,21 @@
 Class {
-	#name : #OSCCommsSump,
+	#name : #OSCSump,
 	#superclass : #CommsSump,
 	#instVars : [
 		'oscerizer',
 		'port'
 	],
-	#category : #'Zeugma-Events'
+	#category : #'Zeugma-EventImport'
 }
 
 { #category : #'instance creation' }
-OSCCommsSump class >> newOnPort: p [
+OSCSump class >> newOnPort: p [
 
 	^ self new setPort: p
 ]
 
 { #category : #running }
-OSCCommsSump >> attendToIncoming [
+OSCSump >> attendToIncoming [
 
 	oscerizer ifNotNil:
 		[ Transcript show: 'OSCCommsSump>>attendToIncoming -- already running'. ^ self].
@@ -25,37 +25,38 @@ OSCCommsSump >> attendToIncoming [
 ]
 
 { #category : #initialization }
-OSCCommsSump >> initialize [
+OSCSump >> initialize [
 
 	super initialize.
 
 ]
 
 { #category : #'processing-and-dispatch' }
-OSCCommsSump >> processSump [
+OSCSump >> processSump [
 	| cnt |
 
 	oscerizer ifNil: [ ^ self ].
 
 	cnt := 	oscerizer messageCount.
 	[ (cnt > 0) and: [ oscerizer hasMessage ] ]
-		whileTrue: [ | mess addr |
+		whileTrue: [ | mess addr args vent |
 			mess := oscerizer nextMessage.
 			addr := mess first.
-			mess := self rawExtractionViaAddr: addr payload: mess allButFirst.
-			self dispatch: mess viaAddr: addr.
+			args := self rawExtractionViaAddr: addr payload: mess allButFirst.
+			vent := self synthesizeEventViaAddr: addr fromArgs: args.
+			self dispatch: vent viaAddr: addr.
 			cnt := cnt - 1.
 		]
 ]
 
 { #category : #initialization }
-OSCCommsSump >> setPort: p [
+OSCSump >> setPort: p [
 
 	port := p.
 ]
 
 { #category : #running }
-OSCCommsSump >> suspendAttention [
+OSCSump >> suspendAttention [
 
 	oscerizer ifNotNil: [ oscerizer terminate ].
 ]

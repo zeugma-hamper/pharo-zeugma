@@ -9,3 +9,9 @@ Class {
 	],
 	#category : #'Zeugma-Events'
 }
+
+{ #category : #initialization }
+ZEYowlEvent class >> initialize [
+
+	deliv_selector := #zeYowl:.
+]

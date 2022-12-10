@@ -49,6 +49,12 @@ Loopervisor >> appendToiler: ler [
 	active_toilers addIfNotPresent: ler.
 ]
 
+{ #category : #accessing }
+Loopervisor >> aqueducts [
+
+	^ active_aqueducts copy
+]
+
 { #category : #looping }
 Loopervisor >> brakeSpin [
 
@@ -90,6 +96,12 @@ Loopervisor >> initialize [
 	active_toilers := OrderedCollection new.
 ]
 
+{ #category : #accessing }
+Loopervisor >> lungs [
+
+	^ active_lungs copy
+]
+
 { #category : #looping }
 Loopervisor >> onceMoreUntoTheBreath [
 
@@ -122,6 +134,30 @@ Loopervisor >> recentestTime [
 	^ recentest_time
 ]
 
+{ #category : #accessing }
+Loopervisor >> removeAqueduct: aq [
+
+	active_aqueducts remove: aq ifAbsent: [ nil ].
+]
+
+{ #category : #accessing }
+Loopervisor >> removeLung: ell [
+
+	active_lungs remove: ell ifAbsent: [ nil ].
+]
+
+{ #category : #accessing }
+Loopervisor >> removeSump: s [
+
+	active_sumps remove: s ifAbsent: [ nil ].
+]
+
+{ #category : #accessing }
+Loopervisor >> removeToiler: toi [
+
+	active_toilers remove: toi ifAbsent: [ nil ].
+]
+
 { #category : #looping }
 Loopervisor >> spinGloriously: target_loop_dur [
 
@@ -140,7 +176,19 @@ Loopervisor >> spinGloriously: target_loop_dur [
 	] forkAt: Processor userBackgroundPriority
 ]
 
-{ #category : #looping }
+{ #category : #accessing }
+Loopervisor >> sumps [
+
+	^ active_sumps copy
+]
+
+{ #category : #accessing }
+Loopervisor >> toilers [
+
+	^ active_toilers copy
+]
+
+{ #category : #toiling }
 Loopervisor >> travail: ratch atTime: thyme [
 
 	active_toilers ifNotNil: [

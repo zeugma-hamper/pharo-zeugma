@@ -63,18 +63,18 @@ Zeubject >> setName: nm [
 	self saccess: #name put: nm
 ]
 
-{ #category : #respiration }
+{ #category : #toiling }
 Zeubject >> travail: ratch atTime: thyme [
-	| toi |
+	| oneOrMany |
 
 	(self sacHas: #anonymousToiler) ifFalse: [ ^ self ].
 
-	toi := self saccess: #anonymousToiler.
-	(toi isKindOf: BlockClosure)
-		ifTrue: [ ^ toi value: ratch value: thyme ].
+	oneOrMany := self saccess: #anonymousToiler.
+	(oneOrMany isKindOf: BlockClosure)
+		ifTrue: [ ^ oneOrMany value: ratch value: thyme ].
 
-	(toi isKindOf: Collection) ifFalse: [ ^ self ].
-	^ toi do: [ :ler | ler value: ratch value: thyme ]
+	(oneOrMany isKindOf: Collection) ifFalse: [ ^ self ].
+	^ oneOrMany do: [ :ler | ler value: ratch value: thyme ]
 ]
 
 { #category : #sac }

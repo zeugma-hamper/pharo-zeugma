@@ -12,6 +12,12 @@ Class {
 	#category : #'Zeugma-Events'
 }
 
+{ #category : #initialization }
+ZESpatialEvent class >> initialize [
+
+	deliv_selector := #zeSpatial:.
+]
+
 { #category : #accessing }
 ZESpatialEvent >> aim [
 	
