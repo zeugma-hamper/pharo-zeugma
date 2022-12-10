@@ -8,7 +8,9 @@ Class {
 		'active_aqueducts',
 		'active_lungs',
 		'active_sumps',
-		'arbeiters'
+		'active_toilers',
+		'proc',
+		'now_looping'
 	],
 	#category : #'Zeugma-TemporalStructure'
 }
@@ -40,6 +42,25 @@ Loopervisor >> appendSump: s [
 	active_sumps addIfNotPresent: s.
 ]
 
+{ #category : #accessing }
+Loopervisor >> appendToiler: ler [
+
+	ler	 ifNil: [ ^self ].
+	active_toilers addIfNotPresent: ler.
+]
+
+{ #category : #looping }
+Loopervisor >> brakeSpin [
+
+	now_looping := false.
+]
+
+{ #category : #looping }
+Loopervisor >> breakSpin [
+
+	self brakeSpin
+]
+
 { #category : #'time-handling' }
 Loopervisor >> elapsedTime [
 
@@ -61,11 +82,12 @@ Loopervisor >> initialize [
 	grand_ratchet := 0.
 	recentest_time := -1.0.
 	start_t := DateAndTime now.
+	now_looping := false.
 
 	active_aqueducts := OrderedCollection new.
 	active_lungs := OrderedCollection new.
 	active_sumps := OrderedCollection new.
-	arbeiters := OrderedCollection new.
+	active_toilers := OrderedCollection new.
 ]
 
 { #category : #looping }
@@ -82,7 +104,7 @@ Loopervisor >> onceMoreUntoTheBreath [
 ]
 
 { #category : #looping }
-Loopervisor >> oneGloriousTurn [
+Loopervisor >> oneDelightfulTurn [
 
 	self onceMoreUntoTheBreath.
 	self travail: grand_ratchet atTime: recentest_time.
@@ -101,9 +123,27 @@ Loopervisor >> recentestTime [
 ]
 
 { #category : #looping }
+Loopervisor >> spinGloriously: target_loop_dur [
+
+	proc := [
+		now_looping := true.
+		[ now_looping ]
+			whileTrue: [ | befo_t dt |
+				befo_t := self class absoluteTime.
+				self oneDelightfulTurn.
+				dt := target_loop_dur - (self class absoluteTime - befo_t).
+				(dt > 0)
+					ifTrue: [ (Delay forSeconds: dt) wait ].
+			].
+		now_looping := false.
+		proc := nil.
+	] forkAt: Processor userBackgroundPriority
+]
+
+{ #category : #looping }
 Loopervisor >> travail: ratch atTime: thyme [
 
-	arbeiters ifNotNil: [
-		arbeiters do: [ :wrkr | wrkr travail: ratch atTime: thyme ]
+	active_toilers ifNotNil: [
+		active_toilers do: [ :wrkr | wrkr travail: ratch atTime: thyme ]
 	].
 ]

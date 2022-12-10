@@ -34,13 +34,19 @@ Zeubject >> name [
 ]
 
 { #category : #sac }
+Zeubject >> sacHas: key [
+
+	^ sac ifNotNil: [sac includesKey: key] ifNil:  [ false ]
+]
+
+{ #category : #sac }
 Zeubject >> saccess: key [
 
 	^ sac ifNotNil: [sac at: key ifAbsent: nil] ifNil:  [ nil ]
 ]
 
 { #category : #sac }
-Zeubject >> saccess: key set: val [
+Zeubject >> saccess: key put: val [
 
 	self assureddSac at: key put: val
 ]
@@ -48,19 +54,27 @@ Zeubject >> saccess: key set: val [
 { #category : #respiration }
 Zeubject >> setBreather: br [
 
-	self saccess: #irlu set: br
+	self saccess: #irlu put: br
 ]
 
 { #category : #sac }
 Zeubject >> setName: nm [
 
-	self saccess: #name set: nm
+	self saccess: #name put: nm
 ]
 
-{ #category : #sac }
+{ #category : #respiration }
 Zeubject >> travail: ratch atTime: thyme [
+	| toi |
 
-	^ self
+	(self sacHas: #anonymousToiler) ifFalse: [ ^ self ].
+
+	toi := self saccess: #anonymousToiler.
+	(toi isKindOf: BlockClosure)
+		ifTrue: [ ^ toi value: ratch value: thyme ].
+
+	(toi isKindOf: Collection) ifFalse: [ ^ self ].
+	^ toi do: [ :ler | ler value: ratch value: thyme ]
 ]
 
 { #category : #sac }
