@@ -2,7 +2,7 @@ Class {
 	#name : #SpaceThing,
 	#superclass : #LimnyThing,
 	#instVars : [
-		'grPile'
+		'gr_pile'
 	],
 	#category : #'Zeugma-SpatialStructure'
 }

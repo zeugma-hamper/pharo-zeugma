@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'sac',
-		'ratFresh'
+		'rat_fresh'
 	],
 	#category : #'Zeugma-Foundation'
 }
@@ -25,6 +25,13 @@ Zeubject >> breather [
 Zeubject >> inhale: ratch attime: thyme [
 
 	^ 0
+]
+
+{ #category : #initialization }
+Zeubject >> initialize [
+
+	super initialize.
+	rat_fresh := -1.
 ]
 
 { #category : #sac }

@@ -2,10 +2,10 @@ Class {
 	#name : #LimnyThing,
 	#superclass : #Zeubject,
 	#instVars : [
-		'limnFlags',
+		'limn_flags',
 		'cumuMats',
-		'adjIro',
-		'cumuAdjc'
+		'adj_iro',
+		'cumu_adjc'
 	],
 	#category : #'Zeugma-SpatialStructure'
 }

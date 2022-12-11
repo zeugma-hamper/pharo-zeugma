@@ -3,9 +3,9 @@ Class {
 	#superclass : #ZeEvent,
 	#instVars : [
 		'utt',
-		'reptOrd',
+		'rept_ord',
 		'modfrs',
-		'proxEnt'
+		'prox_ent'
 	],
 	#category : #'Zeugma-Events'
 }

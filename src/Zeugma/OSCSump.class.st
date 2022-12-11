@@ -39,12 +39,14 @@ OSCSump >> processSump [
 
 	cnt := 	oscerizer messageCount.
 	[ (cnt > 0) and: [ oscerizer hasMessage ] ]
-		whileTrue: [ | mess addr args vent |
+		whileTrue: [ | mess addr args evts |
 			mess := oscerizer nextMessage.
 			addr := mess first.
 			args := self rawExtractionViaAddr: addr payload: mess allButFirst.
-			vent := self synthesizeEventViaAddr: addr fromArgs: args.
-			self dispatch: vent viaAddr: addr.
+			evts := self synthesizeEventViaAddr: addr fromArgs: args.
+			evts do: [ :evt |
+				self dispatch: evt viaAddr: addr.
+			].
 			cnt := cnt - 1.
 		]
 ]
