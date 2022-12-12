@@ -17,8 +17,8 @@ OSCSump class >> newOnPort: p [
 { #category : #running }
 OSCSump >> attendToIncoming [
 
-	oscerizer ifNotNil:
-		[ Transcript show: 'OSCCommsSump>>attendToIncoming -- already running'. ^ self].
+"	oscerizer ifNotNil:
+		[ Transcript show: 'OSCCommsSump>>attendToIncoming -- already running'. ^ self]."
 	(port isInteger) ifFalse:
 		[ ^ self error: '#attendToIncoming -- set the port first, won''t you?' ].
 	oscerizer := OSCServer listenOnPort: port.

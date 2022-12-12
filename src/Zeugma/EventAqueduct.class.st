@@ -11,7 +11,7 @@ Class {
 { #category : #'as yet unclassified' }
 EventAqueduct >> appendEvent: evt [
 
-	drams add: evt.
+	drams nextPut: evt.
 ]
 
 { #category : #'as yet unclassified' }
@@ -25,7 +25,7 @@ EventAqueduct >> drainReservoir [
 	| cnt evt sel |
 
 	cnt := drams size.
-	[ cnt > 0  and:  [ drams isNotEmpty ] ]
+	[ cnt > 0  and:  [ drams isEmpty not ] ]
 		whileTrue: [
 			evt := drams next.
 			sel := evt deliverySelector.
