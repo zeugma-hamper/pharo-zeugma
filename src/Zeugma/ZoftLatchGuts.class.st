@@ -23,8 +23,14 @@ ZoftLatchGuts >> latchVal [
 	^ latchval
 ]
 
+{ #category : #private }
+ZoftLatchGuts >> privatelySetLatchVal: v [
+
+	latchval := v.
+]
+
 { #category : #setting }
 ZoftLatchGuts >> set: v [
 
-	latchval := v.
+	self privatelySetLatchVal: v.
 ]

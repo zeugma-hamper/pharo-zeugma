@@ -1,5 +1,5 @@
 Class {
-	#name : #ZoftSumGuts,
+	#name : #ZoftProdGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
 		'zoft_a',
@@ -9,19 +9,19 @@ Class {
 }
 
 { #category : #accessing }
-ZoftSumGuts >> aZoft [
+ZoftProdGuts >> aZoft [
 
-	^ self summandAZoft
+	^ self multiplicandZoft
 ]
 
 { #category : #accessing }
-ZoftSumGuts >> bZoft [
+ZoftProdGuts >> bZoft [
 
-	^ self summandBZoft
+	^ self multiplierZoft
 ]
 
 { #category : #respiration }
-ZoftSumGuts >> inhale: ratch atTime: thyme [
+ZoftProdGuts >> inhale: ratch atTime: thyme [
 	| aval bval v |
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
@@ -39,38 +39,35 @@ ZoftSumGuts >> inhale: ratch atTime: thyme [
 	].
 
 	v := (aval isNotNil  &  bval isNotNil)
-				ifTrue: [ aval + bval ]
-				ifFalse: [ aval ifNotNil: [ aval ]
-									ifNil: [ bval ifNotNil: [ bval ]
-														ifNil: [ nil ] ]
-							].
+				ifTrue: [ aval * bval ]
+				ifFalse: [ 0].
 	self puppeteerHosts: v.
 	self setRatchet: ratch.
 	^ 0
 ]
 
+{ #category : #accessing }
+ZoftProdGuts >> multiplicandZoft [
+
+	^ zoft_a
+]
+
+{ #category : #accessing }
+ZoftProdGuts >> multiplierZoft [
+
+	^ zoft_b
+]
+
 { #category : #private }
-ZoftSumGuts >> privatelySetSummandAZoft: az [
+ZoftProdGuts >> privatelySetMultiplicandZoft: az [
 
 	zoft_a := az.
 	^ self
 ]
 
 { #category : #private }
-ZoftSumGuts >> privatelySetSummandBZoft: bz [
+ZoftProdGuts >> privatelySetMultiplierZoft: bz [
 
 	zoft_b := bz.
 	^ self
-]
-
-{ #category : #accessing }
-ZoftSumGuts >> summandAZoft [
-
-	^ zoft_a
-]
-
-{ #category : #accessing }
-ZoftSumGuts >> summandBZoft [
-
-	^ zoft_b
 ]
