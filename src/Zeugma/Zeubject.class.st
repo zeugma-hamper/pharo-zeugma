@@ -22,8 +22,9 @@ Zeubject >> breather [
 ]
 
 { #category : #respiration }
-Zeubject >> inhale: ratch attime: thyme [
+Zeubject >> inhale: ratch atTime: thyme [
 
+	rat_fresh := ratch.
 	^ 0
 ]
 
@@ -34,10 +35,22 @@ Zeubject >> initialize [
 	rat_fresh := -1.
 ]
 
+{ #category : #respiration }
+Zeubject >> isFreshFor: ratch [
+
+	^ rat_fresh = ratch
+]
+
 { #category : #sac }
 Zeubject >> name [
 
 	^ self saccess: #name
+]
+
+{ #category : #respiration }
+Zeubject >> ratchet [
+
+	^ rat_fresh.
 ]
 
 { #category : #sac }
@@ -68,6 +81,12 @@ Zeubject >> setBreather: br [
 Zeubject >> setName: nm [
 
 	self saccess: #name put: nm
+]
+
+{ #category : #respiration }
+Zeubject >> setRatchet: rat [
+
+	rat_fresh := rat.
 ]
 
 { #category : #toiling }
