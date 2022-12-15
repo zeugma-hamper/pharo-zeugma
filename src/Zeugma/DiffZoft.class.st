@@ -5,13 +5,25 @@ Class {
 }
 
 { #category : #'instance creation' }
-DiffZoft class >> newWithA: azft andB: bzft [
+DiffZoft class >> newWithA: aZoft andB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
 	g := ZoftDiffGuts new
-			privatelySetMinuendZoft: azft;
-			privatelySetSubtrahendZoft: bzft.
+			privatelySetMinuendZoft: aZoft;
+			privatelySetSubtrahendZoft: bZoft.
+	z privatelySetGuts: g.
+	^ z
+]
+
+{ #category : #'instance creation' }
+DiffZoft class >> newWithMinuendA: aZoft andSubtrahendB: bZoft [
+	| z g |
+
+	z := ZoftThing privateNew.
+	g := ZoftDiffGuts new
+			privatelySetMinuendZoft: aZoft;
+			privatelySetSubtrahendZoft: bZoft.
 	z privatelySetGuts: g.
 	^ z
 ]

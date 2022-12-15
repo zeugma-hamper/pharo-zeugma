@@ -5,13 +5,25 @@ Class {
 }
 
 { #category : #'instance creation' }
-SumZoft class >> newWithA: azft andB: bzft [
+SumZoft class >> newWithA: aZoft andB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
 	g := ZoftSumGuts new
-			privatelySetSummandAZoft: azft;
-			privatelySetSummandBZoft: bzft.
+			privatelySetSummandAZoft: aZoft;
+			privatelySetSummandBZoft: bZoft.
+	z privatelySetGuts: g.
+	^ z
+]
+
+{ #category : #'instance creation' }
+SumZoft class >> newWithSummandA: aZoft andSummandB: bZoft [
+	| z g |
+
+	z := ZoftThing privateNew.
+	g := ZoftSumGuts new
+			privatelySetSummandAZoft: aZoft;
+			privatelySetSummandBZoft: bZoft.
 	z privatelySetGuts: g.
 	^ z
 ]
