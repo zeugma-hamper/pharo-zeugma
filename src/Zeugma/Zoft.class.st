@@ -1,5 +1,5 @@
 Class {
-	#name : #ZoftThing,
+	#name : #Zoft,
 	#superclass : #Zeubject,
 	#instVars : [
 		'val',
@@ -9,16 +9,16 @@ Class {
 }
 
 { #category : #creating }
-ZoftThing class >> new [
+Zoft class >> new [
 
 	self shouldNotImplement
 ]
 
 { #category : #creating }
-ZoftThing class >> newWith: aZoftOrPlainVal [
+Zoft class >> newWith: aZoftOrPlainVal [
 	| newz |
 
-	(aZoftOrPlainVal isKindOf: ZoftThing)
+	(aZoftOrPlainVal isKindOf: Zoft)
 		ifFalse: [ ^ LatchZoft newWith: aZoftOrPlainVal ].
 
 	newz := self privateNew.
@@ -28,13 +28,21 @@ ZoftThing class >> newWith: aZoftOrPlainVal [
 ]
 
 { #category : #private }
-ZoftThing class >> privateNew [
+Zoft class >> privateNew [
 
 	^ super new
 ]
 
+{ #category : #promoting }
+Zoft class >> zoftenIfNotOne: maybeZoft [
+
+	^ (maybeZoft isKindOf: self)
+			ifTrue: [ maybeZoft ]
+			ifFalse: [ self newWith: maybeZoft ]
+]
+
 { #category : #behavior }
-ZoftThing >> becomeLike: othazoft [
+Zoft >> becomeLike: othazoft [
 
 	othazoft == self ifTrue: [ ^ self ].
 	othazoft guts == guts ifTrue: [ ^ self ].
@@ -46,7 +54,7 @@ ZoftThing >> becomeLike: othazoft [
 ]
 
 { #category : #'reflective operations' }
-ZoftThing >> doesNotUnderstand: mess [
+Zoft >> doesNotUnderstand: mess [
 
 	guts ifNotNil: [ (guts respondsTo: mess selector)
 								ifTrue: [ ^ mess sendTo: guts ] ].
@@ -54,13 +62,13 @@ ZoftThing >> doesNotUnderstand: mess [
 ]
 
 { #category : #accessing }
-ZoftThing >> guts [
+Zoft >> guts [
 
 	^ guts
 ]
 
 { #category : #respiration }
-ZoftThing >> inhale: ratch atTime: thyme [
+Zoft >> inhale: ratch atTime: thyme [
 
 	(guts isFreshFor: ratch) ifFalse: [
 		guts inhale: ratch atTime: thyme.
@@ -70,7 +78,7 @@ ZoftThing >> inhale: ratch atTime: thyme [
 ]
 
 { #category : #private }
-ZoftThing >> privatelySetGuts: g [
+Zoft >> privatelySetGuts: g [
 
 	(guts := g)
 		ifNotNil: [ g appendHost: self ].
@@ -78,20 +86,20 @@ ZoftThing >> privatelySetGuts: g [
 ]
 
 { #category : #private }
-ZoftThing >> privatelySetVal: v [
+Zoft >> privatelySetVal: v [
 
 	val := v.
 	^ self
 ]
 
 { #category : #accessing }
-ZoftThing >> setVal: v [
+Zoft >> setVal: v [
 
 	val := v.
 ]
 
 { #category : #accessing }
-ZoftThing >> val [
+Zoft >> val [
 
 	^ val
 ]

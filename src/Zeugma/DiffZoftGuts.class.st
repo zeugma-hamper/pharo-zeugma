@@ -1,24 +1,8 @@
 Class {
 	#name : #DiffZoftGuts,
-	#superclass : #ZoftGuts,
-	#instVars : [
-		'zoft_a',
-		'zoft_b'
-	],
+	#superclass : #ArithZoftGuts,
 	#category : #'Zeugma-Zofts-Guts'
 }
-
-{ #category : #accessing }
-DiffZoftGuts >> aZoft [
-
-	^ self minuendZoft
-]
-
-{ #category : #accessing }
-DiffZoftGuts >> bZoft [
-
-	^ self subtrahendZoft
-]
 
 { #category : #respiration }
 DiffZoftGuts >> inhale: ratch atTime: thyme [
@@ -49,28 +33,28 @@ DiffZoftGuts >> inhale: ratch atTime: thyme [
 	^ 0
 ]
 
+{ #category : #private }
+DiffZoftGuts >> installMinuendZoft: az [
+
+	self installAZoft: az.
+	^ self
+]
+
+{ #category : #private }
+DiffZoftGuts >> installSubtrahendZoft: bz [
+
+	self installBZoft: bz.
+	^ self
+]
+
 { #category : #accessing }
 DiffZoftGuts >> minuendZoft [
 
-	^ zoft_a
-]
-
-{ #category : #private }
-DiffZoftGuts >> privatelySetMinuendZoft: az [
-
-	zoft_a := az.
-	^ self
-]
-
-{ #category : #private }
-DiffZoftGuts >> privatelySetSubtrahendZoft: bz [
-
-	zoft_b := bz.
-	^ self
+	^ self aZoft
 ]
 
 { #category : #accessing }
 DiffZoftGuts >> subtrahendZoft [
 
-	^ zoft_b
+	^ self bZoft
 ]

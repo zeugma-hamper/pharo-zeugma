@@ -1,29 +1,17 @@
 Class {
 	#name : #ProdZoft,
-	#superclass : #ZoftGenerator,
+	#superclass : #ArithZoft,
 	#category : #'Zeugma-Zofts'
 }
 
 { #category : #'instance creation' }
 ProdZoft class >> newWithA: aZoft andB: bZoft [
-	| z g |
 
-	z := ZoftThing privateNew.
-	g := ProdZoftGuts new
-			privatelySetMultiplicandZoft: aZoft;
-			privatelySetMultiplierZoft: bZoft.
-	z privatelySetGuts: g.
-	^ z
+	^ self superclass newWithA: aZoft andB: bZoft andGutsClass: ProdZoftGuts
 ]
 
 { #category : #'instance creation' }
 ProdZoft class >> newWithMultiplicandA: aZoft andMultiplierB: bZoft [
-	| z g |
 
-	z := ZoftThing privateNew.
-	g := ProdZoftGuts new
-			privatelySetMultiplicandZoft: aZoft;
-			privatelySetMultiplierZoft: bZoft.
-	z privatelySetGuts: g.
-	^ z
+	^ self newWithA: aZoft andB: bZoft
 ]

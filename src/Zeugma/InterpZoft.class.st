@@ -8,7 +8,7 @@ Class {
 InterpZoft class >> newWithPointA: aZoft andPointB: bZoft [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := InterpZoftGuts new
 			installPointAZoft: aZoft;
 			installPointBZoft: bZoft.
@@ -20,10 +20,10 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft [
 InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpFunc: f [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := InterpZoftGuts new
-			installPointAZoft: aZoft;
-			installPointBZoft: bZoft;
+			installPointAZoft: (Zoft zoftenIfNotOne: aZoft);
+			installPointBZoft: (Zoft zoftenIfNotOne: bZoft);
 			setInterpFunc: f.
 	z privatelySetGuts: g.
 	^ z
@@ -33,10 +33,10 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpFunc: f [
 InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpTime: t [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := InterpZoftGuts new
-			installPointAZoft: aZoft;
-			installPointBZoft: bZoft;
+			installPointAZoft: (Zoft zoftenIfNotOne: aZoft);
+			installPointBZoft: (Zoft zoftenIfNotOne: bZoft);
 			setInterpTime: t.
 	z privatelySetGuts: g.
 	^ z
@@ -46,10 +46,10 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpTime: t [
 InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpTime: t andInterpFunc: f [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := InterpZoftGuts new
-			installPointAZoft: aZoft;
-			installPointBZoft: bZoft;
+			installPointAZoft: (Zoft zoftenIfNotOne: aZoft);
+			installPointBZoft: (Zoft zoftenIfNotOne: bZoft);
 			setInterpTime: t;
 			setInterpFunc: f.
 	z privatelySetGuts: g.

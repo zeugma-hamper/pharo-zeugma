@@ -2,10 +2,10 @@ Class {
 	#name : #SinuZoftGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
-		'ampl',
-		'freq',
-		'cent',
-		'phas'
+		'z_ampl',
+		'z_freq',
+		'z_cent',
+		'z_phas'
 	],
 	#category : #'Zeugma-Zofts-Guts'
 }
@@ -13,19 +13,19 @@ Class {
 { #category : #accessing }
 SinuZoftGuts >> amplitudeZoft [
 
-	^ ampl
+	^ z_ampl
 ]
 
 { #category : #accessing }
 SinuZoftGuts >> centerZoft [
 
-	^ cent
+	^ z_cent
 ]
 
 { #category : #accessing }
 SinuZoftGuts >> frequencyZoft [
 
-	^ freq
+	^ z_freq
 ]
 
 { #category : #respiration }
@@ -34,51 +34,51 @@ SinuZoftGuts >> inhale: ratch atTime: thyme [
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
 
-	ampl inhale: ratch atTime: thyme.
-	freq inhale: ratch atTime: thyme.
-	cent ifNotNil: [ cent inhale: ratch atTime: thyme ].
-	phas ifNotNil: [ ampl inhale: ratch atTime: thyme ].
+	z_ampl inhale: ratch atTime: thyme.
+	z_freq inhale: ratch atTime: thyme.
+	z_cent ifNotNil: [ z_cent inhale: ratch atTime: thyme ].
+	z_phas ifNotNil: [ z_ampl inhale: ratch atTime: thyme ].
 
-	v := 2.0 * Float pi * freq val.
-	phas ifNotNil: [ v := v + phas val ].
+	v := 2.0 * Float pi * z_freq val.
+	z_phas ifNotNil: [ v := v + z_phas val ].
 	v := v sin.
-	cent ifNotNil: [ v := v + cent val ].
+	z_cent ifNotNil: [ v := v + z_cent val ].
 
 	self puppeteerHosts: v.
 	self setRatchet: ratch.
 	^ 0
 ]
 
+{ #category : #private }
+SinuZoftGuts >> installAmplitudeZoft: z [
+
+	z_ampl := z.
+	^ self
+]
+
+{ #category : #private }
+SinuZoftGuts >> installCenterZoft: z [
+
+	z_cent := z.
+	^ self
+]
+
+{ #category : #private }
+SinuZoftGuts >> installFrequencyZoft: z [
+
+	z_freq := z.
+	^ self
+]
+
+{ #category : #private }
+SinuZoftGuts >> installPhaseZoft: z [
+
+	z_phas := z.
+	^ self
+]
+
 { #category : #accessing }
 SinuZoftGuts >> phaseZoft [
 
-	^ phas
-]
-
-{ #category : #private }
-SinuZoftGuts >> privatelySetAmplitudeZoft: z [
-
-	ampl := z.
-	^ self
-]
-
-{ #category : #private }
-SinuZoftGuts >> privatelySetCenterZoft: z [
-
-	cent := z.
-	^ self
-]
-
-{ #category : #private }
-SinuZoftGuts >> privatelySetFrequencyZoft: z [
-
-	freq := z.
-	^ self
-]
-
-{ #category : #private }
-SinuZoftGuts >> privatelySetPhaseZoft: z [
-
-	phas := z.
-	^ self
+	^ z_phas
 ]

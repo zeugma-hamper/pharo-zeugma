@@ -1,24 +1,8 @@
 Class {
 	#name : #ProdZoftGuts,
-	#superclass : #ZoftGuts,
-	#instVars : [
-		'zoft_a',
-		'zoft_b'
-	],
+	#superclass : #ArithZoftGuts,
 	#category : #'Zeugma-Zofts-Guts'
 }
-
-{ #category : #accessing }
-ProdZoftGuts >> aZoft [
-
-	^ self multiplicandZoft
-]
-
-{ #category : #accessing }
-ProdZoftGuts >> bZoft [
-
-	^ self multiplierZoft
-]
 
 { #category : #respiration }
 ProdZoftGuts >> inhale: ratch atTime: thyme [
@@ -46,28 +30,28 @@ ProdZoftGuts >> inhale: ratch atTime: thyme [
 	^ 0
 ]
 
+{ #category : #private }
+ProdZoftGuts >> installMultiplicandZoft: az [
+
+	self installAZoft: az.
+	^ self
+]
+
+{ #category : #private }
+ProdZoftGuts >> installMultiplierZoft: bz [
+
+	self installBZoft: bz.
+	^ self
+]
+
 { #category : #accessing }
 ProdZoftGuts >> multiplicandZoft [
 
-	^ zoft_a
+	^ self aZoft
 ]
 
 { #category : #accessing }
 ProdZoftGuts >> multiplierZoft [
 
-	^ zoft_b
-]
-
-{ #category : #private }
-ProdZoftGuts >> privatelySetMultiplicandZoft: az [
-
-	zoft_a := az.
-	^ self
-]
-
-{ #category : #private }
-ProdZoftGuts >> privatelySetMultiplierZoft: bz [
-
-	zoft_b := bz.
-	^ self
+	^ self bZoft
 ]

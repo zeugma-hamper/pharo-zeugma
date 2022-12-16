@@ -8,7 +8,7 @@ Class {
 LatchZoft class >> newWith: aNonZoft [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := LatchZoftGuts new
 			privatelySetLatchVal: aNonZoft.
 	z privatelySetGuts: g.

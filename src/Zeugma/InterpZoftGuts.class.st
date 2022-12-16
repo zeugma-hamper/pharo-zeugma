@@ -2,8 +2,8 @@ Class {
 	#name : #InterpZoftGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
-		'pnt_a',
-		'pnt_b',
+		'z_pnt_a',
+		'z_pnt_b',
 		'interp_time',
 		'interp_func',
 		'start_time',
@@ -122,8 +122,8 @@ InterpZoftGuts >> inhale: ratch atTime: thyme [
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
 
-	pnt_a inhale: ratch atTime: thyme.
-	pnt_b inhale: ratch atTime: thyme.
+	z_pnt_a inhale: ratch atTime: thyme.
+	z_pnt_b inhale: ratch atTime: thyme.
 
 	natal ifTrue: [
 		start_time := thyme.
@@ -131,7 +131,7 @@ InterpZoftGuts >> inhale: ratch atTime: thyme [
 	].
 
 	(recent_time >= interp_time) ifTrue: [
-		self puppeteerHosts: pnt_b val.
+		self puppeteerHosts: z_pnt_b val.
 		replete := true.
 		^ 0
 	].
@@ -143,7 +143,7 @@ InterpZoftGuts >> inhale: ratch atTime: thyme [
 	t := recent_time / interp_time.
 	t := InterpZoftGuts perform: interp_func with: t.
 	(t > 1.0) ifTrue: [ t := 1.0 ].
-	v := (pnt_a val * (1.0 - t)) + (pnt_b val * t).
+	v := (z_pnt_a val * (1.0 - t)) + (z_pnt_b val * t).
 
 	self puppeteerHosts: v.
 	self setRatchet: ratch.
@@ -162,14 +162,14 @@ InterpZoftGuts >> initialize [
 { #category : #private }
 InterpZoftGuts >> installPointAZoft: aZoft [
 
-	pnt_a := aZoft.
+	z_pnt_a := aZoft.
 	^ self
 ]
 
 { #category : #private }
 InterpZoftGuts >> installPointBZoft: bZoft [
 
-	pnt_b := bZoft.
+	z_pnt_b := bZoft.
 	^ self
 ]
 
@@ -188,22 +188,22 @@ InterpZoftGuts >> interpTime [
 { #category : #accessing }
 InterpZoftGuts >> pointAZoft [
 
-	^ pnt_a
+	^ z_pnt_a
 ]
 
 { #category : #accessing }
 InterpZoftGuts >> pointBZoft [
 
-	^ pnt_b
+	^ z_pnt_b
 ]
 
 { #category : #controlling }
 InterpZoftGuts >> reverseInterp [
 	| tmp |
 
-	tmp := pnt_a.
-	pnt_a := pnt_b.
-	pnt_b := tmp.
+	tmp := z_pnt_a.
+	z_pnt_a := z_pnt_b.
+	z_pnt_b := tmp.
 	replete
 		ifTrue: [ self commenceInterp ]
 		ifFalse: [ recent_time := interp_time - recent_time ].

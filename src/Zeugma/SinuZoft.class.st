@@ -8,10 +8,10 @@ Class {
 SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := SinuZoftGuts new
-			privatelySetAmplitudeZoft: amplZoft;
-			privatelySetFrequencyZoft: freqZoft.
+			installAmplitudeZoft: (Zoft zoftenIfNotOne: amplZoft);
+			installFrequencyZoft: (Zoft zoftenIfNotOne: freqZoft).
 	z privatelySetGuts: g.
 	^ z
 ]
@@ -20,11 +20,11 @@ SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft [
 SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andCenter: centZoft [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := SinuZoftGuts new
-			privatelySetAmplitudeZoft: amplZoft;
-			privatelySetFrequencyZoft: freqZoft;
-			privatelySetCenterZoft: centZoft.
+			installAmplitudeZoft: (Zoft zoftenIfNotOne: amplZoft);
+			installFrequencyZoft: (Zoft zoftenIfNotOne: freqZoft);
+			installCenterZoft: (Zoft zoftenIfNotOne: centZoft).
 	z privatelySetGuts: g.
 	^ z
 ]
@@ -33,12 +33,12 @@ SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andCenter: c
 SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andCenter: centZoft andPhase: phasZoft [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := SinuZoftGuts new
-			privatelySetAmplitudeZoft: amplZoft;
-			privatelySetFrequencyZoft: freqZoft;
-			privatelySetCenterZoft: centZoft;
-			privatelySetPhaseZoft: phasZoft.
+			installAmplitudeZoft: (Zoft zoftenIfNotOne: amplZoft);
+			installFrequencyZoft: (Zoft zoftenIfNotOne: freqZoft);
+			installCenterZoft: (Zoft zoftenIfNotOne: centZoft);
+			installPhaseZoft: (Zoft zoftenIfNotOne: phasZoft).
 	z privatelySetGuts: g.
 	^ z
 ]
@@ -47,11 +47,11 @@ SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andCenter: c
 SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andPhase: phasZoft [
 	| z g |
 
-	z := ZoftThing privateNew.
+	z := Zoft privateNew.
 	g := SinuZoftGuts new
-			privatelySetAmplitudeZoft: amplZoft;
-			privatelySetFrequencyZoft: freqZoft;
-			privatelySetPhaseZoft: phasZoft.
+			installAmplitudeZoft: (Zoft zoftenIfNotOne: amplZoft);
+			installFrequencyZoft: (Zoft zoftenIfNotOne: freqZoft);
+			installPhaseZoft: (Zoft zoftenIfNotOne: phasZoft).
 	z privatelySetGuts: g.
 	^ z
 ]
