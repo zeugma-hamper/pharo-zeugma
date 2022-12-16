@@ -29,7 +29,7 @@ ZoftInterpGuts class >> ASYMP_A: t [
 { #category : #'interp-functions' }
 ZoftInterpGuts class >> ASYMP_AB: t [
 
-	^ self JANUSIZE: t lftFunc: #ASYMP_A: rgtFunc: #ASYMP_B
+	^ self JANUSIZE: t lftFunc: #ASYMP_A: rgtFunc: #ASYMP_B:
 ]
 
 { #category : #'interp-functions' }
@@ -53,7 +53,7 @@ ZoftInterpGuts class >> CUBIC_A: t [
 { #category : #'interp-functions' }
 ZoftInterpGuts class >> CUBIC_AB: t [
 
-	^ self JANUSIZE: t lftFunc: #CUBIC_A: rgtFunc: #CUBIC_B
+	^ self JANUSIZE: t lftFunc: #CUBIC_A: rgtFunc: #CUBIC_B:
 ]
 
 { #category : #'interp-functions' }
@@ -91,7 +91,7 @@ ZoftInterpGuts class >> QUADRATIC_A: t [
 { #category : #'interp-functions' }
 ZoftInterpGuts class >> QUADRATIC_AB: t [
 
-	^ self JANUSIZE: t lftFunc: #QUADRATIC_A: rgtFunc: #QUADRATIC_B
+	^ self JANUSIZE: t lftFunc: #QUADRATIC_A: rgtFunc: #QUADRATIC_B:
 ]
 
 { #category : #'interp-functions' }
@@ -213,7 +213,10 @@ ZoftInterpGuts >> reverseInterp [
 { #category : #accessing }
 ZoftInterpGuts >> setInterpFunc: ifunc [
 
-	interp_func := ifunc.
+	interp_func :=
+		(ifunc endsWith: ':')
+			ifTrue: [ ifunc ]
+			ifFalse: [ ifunc , ':' ]. "everyone forgets, you know?"
 	^ self
 ]
 
