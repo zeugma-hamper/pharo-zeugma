@@ -5,7 +5,7 @@ Class {
 		'rat_fresh',
 		'zt_hosts'
 	],
-	#category : #'Zeugma-Zofts'
+	#category : #'Zeugma-Zofts-Guts'
 }
 
 { #category : #'zoft-hosts' }

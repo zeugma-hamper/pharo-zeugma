@@ -1,27 +1,27 @@
 Class {
-	#name : #ZoftDiffGuts,
+	#name : #ProdZoftGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
 		'zoft_a',
 		'zoft_b'
 	],
-	#category : #'Zeugma-Zofts'
+	#category : #'Zeugma-Zofts-Guts'
 }
 
 { #category : #accessing }
-ZoftDiffGuts >> aZoft [
+ProdZoftGuts >> aZoft [
 
-	^ self minuendZoft
+	^ self multiplicandZoft
 ]
 
 { #category : #accessing }
-ZoftDiffGuts >> bZoft [
+ProdZoftGuts >> bZoft [
 
-	^ self subtrahendZoft
+	^ self multiplierZoft
 ]
 
 { #category : #respiration }
-ZoftDiffGuts >> inhale: ratch atTime: thyme [
+ProdZoftGuts >> inhale: ratch atTime: thyme [
 	| aval bval v |
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
@@ -39,38 +39,35 @@ ZoftDiffGuts >> inhale: ratch atTime: thyme [
 	].
 
 	v := (aval isNotNil  &  bval isNotNil)
-				ifTrue: [ aval - bval ]
-				ifFalse: [ aval ifNotNil: [ aval ]
-									ifNil: [ bval ifNotNil: [ bval negated ]
-														ifNil: [ nil ] ]
-							].
+				ifTrue: [ aval * bval ]
+				ifFalse: [ 0].
 	self puppeteerHosts: v.
 	self setRatchet: ratch.
 	^ 0
 ]
 
 { #category : #accessing }
-ZoftDiffGuts >> minuendZoft [
+ProdZoftGuts >> multiplicandZoft [
 
 	^ zoft_a
 ]
 
+{ #category : #accessing }
+ProdZoftGuts >> multiplierZoft [
+
+	^ zoft_b
+]
+
 { #category : #private }
-ZoftDiffGuts >> privatelySetMinuendZoft: az [
+ProdZoftGuts >> privatelySetMultiplicandZoft: az [
 
 	zoft_a := az.
 	^ self
 ]
 
 { #category : #private }
-ZoftDiffGuts >> privatelySetSubtrahendZoft: bz [
+ProdZoftGuts >> privatelySetMultiplierZoft: bz [
 
 	zoft_b := bz.
 	^ self
-]
-
-{ #category : #accessing }
-ZoftDiffGuts >> subtrahendZoft [
-
-	^ zoft_b
 ]

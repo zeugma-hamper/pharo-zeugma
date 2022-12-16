@@ -1,14 +1,14 @@
 Class {
-	#name : #ZoftLatchGuts,
+	#name : #LatchZoftGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
 		'latchval'
 	],
-	#category : #'Zeugma-Zofts'
+	#category : #'Zeugma-Zofts-Guts'
 }
 
 { #category : #respiration }
-ZoftLatchGuts >> inhale: ratch atTime: thyme [
+LatchZoftGuts >> inhale: ratch atTime: thyme [
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
 
@@ -18,19 +18,19 @@ ZoftLatchGuts >> inhale: ratch atTime: thyme [
 ]
 
 { #category : #accessing }
-ZoftLatchGuts >> latchVal [
+LatchZoftGuts >> latchVal [
 
 	^ latchval
 ]
 
 { #category : #private }
-ZoftLatchGuts >> privatelySetLatchVal: v [
+LatchZoftGuts >> privatelySetLatchVal: v [
 
 	latchval := v.
 ]
 
 { #category : #setting }
-ZoftLatchGuts >> set: v [
+LatchZoftGuts >> set: v [
 
 	self privatelySetLatchVal: v.
 ]

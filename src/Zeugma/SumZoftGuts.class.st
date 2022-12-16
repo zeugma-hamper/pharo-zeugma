@@ -1,27 +1,27 @@
 Class {
-	#name : #ZoftSumGuts,
+	#name : #SumZoftGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
 		'zoft_a',
 		'zoft_b'
 	],
-	#category : #'Zeugma-Zofts'
+	#category : #'Zeugma-Zofts-Guts'
 }
 
 { #category : #accessing }
-ZoftSumGuts >> aZoft [
+SumZoftGuts >> aZoft [
 
 	^ self summandAZoft
 ]
 
 { #category : #accessing }
-ZoftSumGuts >> bZoft [
+SumZoftGuts >> bZoft [
 
 	^ self summandBZoft
 ]
 
 { #category : #respiration }
-ZoftSumGuts >> inhale: ratch atTime: thyme [
+SumZoftGuts >> inhale: ratch atTime: thyme [
 	| aval bval v |
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
@@ -50,27 +50,27 @@ ZoftSumGuts >> inhale: ratch atTime: thyme [
 ]
 
 { #category : #private }
-ZoftSumGuts >> privatelySetSummandAZoft: az [
+SumZoftGuts >> privatelySetSummandAZoft: az [
 
 	zoft_a := az.
 	^ self
 ]
 
 { #category : #private }
-ZoftSumGuts >> privatelySetSummandBZoft: bz [
+SumZoftGuts >> privatelySetSummandBZoft: bz [
 
 	zoft_b := bz.
 	^ self
 ]
 
 { #category : #accessing }
-ZoftSumGuts >> summandAZoft [
+SumZoftGuts >> summandAZoft [
 
 	^ zoft_a
 ]
 
 { #category : #accessing }
-ZoftSumGuts >> summandBZoft [
+SumZoftGuts >> summandBZoft [
 
 	^ zoft_b
 ]

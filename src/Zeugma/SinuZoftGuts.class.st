@@ -1,5 +1,5 @@
 Class {
-	#name : #ZoftSinuGuts,
+	#name : #SinuZoftGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
 		'ampl',
@@ -7,29 +7,29 @@ Class {
 		'cent',
 		'phas'
 	],
-	#category : #'Zeugma-Zofts'
+	#category : #'Zeugma-Zofts-Guts'
 }
 
 { #category : #accessing }
-ZoftSinuGuts >> amplitudeZoft [
+SinuZoftGuts >> amplitudeZoft [
 
 	^ ampl
 ]
 
 { #category : #accessing }
-ZoftSinuGuts >> centerZoft [
+SinuZoftGuts >> centerZoft [
 
 	^ cent
 ]
 
 { #category : #accessing }
-ZoftSinuGuts >> frequencyZoft [
+SinuZoftGuts >> frequencyZoft [
 
 	^ freq
 ]
 
 { #category : #respiration }
-ZoftSinuGuts >> inhale: ratch atTime: thyme [
+SinuZoftGuts >> inhale: ratch atTime: thyme [
 	| v |
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
@@ -50,34 +50,34 @@ ZoftSinuGuts >> inhale: ratch atTime: thyme [
 ]
 
 { #category : #accessing }
-ZoftSinuGuts >> phaseZoft [
+SinuZoftGuts >> phaseZoft [
 
 	^ phas
 ]
 
 { #category : #private }
-ZoftSinuGuts >> privatelySetAmplitudeZoft: z [
+SinuZoftGuts >> privatelySetAmplitudeZoft: z [
 
 	ampl := z.
 	^ self
 ]
 
 { #category : #private }
-ZoftSinuGuts >> privatelySetCenterZoft: z [
+SinuZoftGuts >> privatelySetCenterZoft: z [
 
 	cent := z.
 	^ self
 ]
 
 { #category : #private }
-ZoftSinuGuts >> privatelySetFrequencyZoft: z [
+SinuZoftGuts >> privatelySetFrequencyZoft: z [
 
 	freq := z.
 	^ self
 ]
 
 { #category : #private }
-ZoftSinuGuts >> privatelySetPhaseZoft: z [
+SinuZoftGuts >> privatelySetPhaseZoft: z [
 
 	phas := z.
 	^ self

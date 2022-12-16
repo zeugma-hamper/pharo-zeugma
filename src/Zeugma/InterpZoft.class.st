@@ -9,7 +9,7 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftInterpGuts new
+	g := InterpZoftGuts new
 			installPointAZoft: aZoft;
 			installPointBZoft: bZoft.
 	z privatelySetGuts: g.
@@ -21,7 +21,7 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpFunc: f [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftInterpGuts new
+	g := InterpZoftGuts new
 			installPointAZoft: aZoft;
 			installPointBZoft: bZoft;
 			setInterpFunc: f.
@@ -34,7 +34,7 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpTime: t [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftInterpGuts new
+	g := InterpZoftGuts new
 			installPointAZoft: aZoft;
 			installPointBZoft: bZoft;
 			setInterpTime: t.
@@ -47,7 +47,7 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft andInterpTime: t andIn
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftInterpGuts new
+	g := InterpZoftGuts new
 			installPointAZoft: aZoft;
 			installPointBZoft: bZoft;
 			setInterpTime: t;

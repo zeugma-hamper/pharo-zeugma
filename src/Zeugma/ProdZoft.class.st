@@ -9,7 +9,7 @@ ProdZoft class >> newWithA: aZoft andB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftProdGuts new
+	g := ProdZoftGuts new
 			privatelySetMultiplicandZoft: aZoft;
 			privatelySetMultiplierZoft: bZoft.
 	z privatelySetGuts: g.
@@ -21,7 +21,7 @@ ProdZoft class >> newWithMultiplicandA: aZoft andMultiplierB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftProdGuts new
+	g := ProdZoftGuts new
 			privatelySetMultiplicandZoft: aZoft;
 			privatelySetMultiplierZoft: bZoft.
 	z privatelySetGuts: g.

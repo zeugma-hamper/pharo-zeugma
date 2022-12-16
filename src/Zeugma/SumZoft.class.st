@@ -9,7 +9,7 @@ SumZoft class >> newWithA: aZoft andB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftSumGuts new
+	g := SumZoftGuts new
 			privatelySetSummandAZoft: aZoft;
 			privatelySetSummandBZoft: bZoft.
 	z privatelySetGuts: g.
@@ -21,7 +21,7 @@ SumZoft class >> newWithSummandA: aZoft andSummandB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftSumGuts new
+	g := SumZoftGuts new
 			privatelySetSummandAZoft: aZoft;
 			privatelySetSummandBZoft: bZoft.
 	z privatelySetGuts: g.

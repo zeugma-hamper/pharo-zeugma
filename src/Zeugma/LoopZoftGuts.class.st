@@ -1,5 +1,5 @@
 Class {
-	#name : #ZoftLoopGuts,
+	#name : #LoopZoftGuts,
 	#superclass : #ZoftGuts,
 	#instVars : [
 		'prev_val',
@@ -10,17 +10,17 @@ Class {
 		'loop_time',
 		'natal'
 	],
-	#category : #'Zeugma-Zofts'
+	#category : #'Zeugma-Zofts-Guts'
 }
 
 { #category : #accessing }
-ZoftLoopGuts >> dxdtZoft [
+LoopZoftGuts >> dxdtZoft [
 
 	^ dx_dt
 ]
 
 { #category : #respiration }
-ZoftLoopGuts >> inhale: ratch atTime: thyme [
+LoopZoftGuts >> inhale: ratch atTime: thyme [
 	| dt v t  |
 
 	(self isFreshFor: ratch) ifTrue: [ ^ 0 ].
@@ -53,47 +53,47 @@ ZoftLoopGuts >> inhale: ratch atTime: thyme [
 ]
 
 { #category : #initialization }
-ZoftLoopGuts >> initialize [
+LoopZoftGuts >> initialize [
 
 	super initialize.
 	natal := true.
 ]
 
 { #category : #accessing }
-ZoftLoopGuts >> loopDurZoft [
+LoopZoftGuts >> loopDurZoft [
 
 	^ loop_dur
 ]
 
 { #category : #private }
-ZoftLoopGuts >> privatelySetDXDTZoft: dxdtZoft [
+LoopZoftGuts >> privatelySetDXDTZoft: dxdtZoft [
 
 	dx_dt := dxdtZoft.
 	^ self
 ]
 
 { #category : #private }
-ZoftLoopGuts >> privatelySetLoopDurZoft: ldurZoft [
+LoopZoftGuts >> privatelySetLoopDurZoft: ldurZoft [
 
 	loop_dur := ldurZoft.
 	^ self
 ]
 
 { #category : #private }
-ZoftLoopGuts >> privatelySetStartZoft: stZoft [
+LoopZoftGuts >> privatelySetStartZoft: stZoft [
 
 	start := stZoft.
 	^ self
 ]
 
 { #category : #controlling }
-ZoftLoopGuts >> restartLoop [
+LoopZoftGuts >> restartLoop [
 
 	natal := true.
 ]
 
 { #category : #accessing }
-ZoftLoopGuts >> startZoft [
+LoopZoftGuts >> startZoft [
 
 	^ start
 ]

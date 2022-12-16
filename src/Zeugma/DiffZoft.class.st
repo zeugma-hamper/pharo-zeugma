@@ -9,7 +9,7 @@ DiffZoft class >> newWithA: aZoft andB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftDiffGuts new
+	g := DiffZoftGuts new
 			privatelySetMinuendZoft: aZoft;
 			privatelySetSubtrahendZoft: bZoft.
 	z privatelySetGuts: g.
@@ -21,7 +21,7 @@ DiffZoft class >> newWithMinuendA: aZoft andSubtrahendB: bZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftDiffGuts new
+	g := DiffZoftGuts new
 			privatelySetMinuendZoft: aZoft;
 			privatelySetSubtrahendZoft: bZoft.
 	z privatelySetGuts: g.

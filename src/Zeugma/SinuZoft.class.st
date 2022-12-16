@@ -9,7 +9,7 @@ SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftSinuGuts new
+	g := SinuZoftGuts new
 			privatelySetAmplitudeZoft: amplZoft;
 			privatelySetFrequencyZoft: freqZoft.
 	z privatelySetGuts: g.
@@ -21,7 +21,7 @@ SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andCenter: c
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftSinuGuts new
+	g := SinuZoftGuts new
 			privatelySetAmplitudeZoft: amplZoft;
 			privatelySetFrequencyZoft: freqZoft;
 			privatelySetCenterZoft: centZoft.
@@ -34,7 +34,7 @@ SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andCenter: c
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftSinuGuts new
+	g := SinuZoftGuts new
 			privatelySetAmplitudeZoft: amplZoft;
 			privatelySetFrequencyZoft: freqZoft;
 			privatelySetCenterZoft: centZoft;
@@ -48,7 +48,7 @@ SinuZoft class >> newWithAmplitude: amplZoft andFrequency: freqZoft andPhase: ph
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftSinuGuts new
+	g := SinuZoftGuts new
 			privatelySetAmplitudeZoft: amplZoft;
 			privatelySetFrequencyZoft: freqZoft;
 			privatelySetPhaseZoft: phasZoft.

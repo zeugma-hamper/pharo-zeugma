@@ -9,7 +9,7 @@ LoopZoft class >> newWithStart: stZoft andDXDT: dxdtZoft andLoopDur: ldurZoft [
 	| z g |
 
 	z := ZoftThing privateNew.
-	g := ZoftLoopGuts new
+	g := LoopZoftGuts new
 			privatelySetStartZoft: stZoft;
 			privatelySetDXDTZoft: dxdtZoft;
 			privatelySetLoopDurZoft: ldurZoft.
