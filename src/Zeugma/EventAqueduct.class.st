@@ -8,13 +8,13 @@ Class {
 	#category : #'Zeugma-EventTransport'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 EventAqueduct >> appendEvent: evt [
 
 	drams nextPut: evt.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 EventAqueduct >> appendPhage: phg [
 
 	phages nextPut: phg.

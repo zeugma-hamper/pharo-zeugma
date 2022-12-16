@@ -19,7 +19,7 @@ ZoftLoopGuts >> dxdtZoft [
 	^ dx_dt
 ]
 
-{ #category : #initialization }
+{ #category : #respiration }
 ZoftLoopGuts >> inhale: ratch atTime: thyme [
 	| dt v t  |
 
@@ -42,8 +42,7 @@ ZoftLoopGuts >> inhale: ratch atTime: thyme [
 	v := prev_val + (dt * dx_dt val).
 	t := loop_dur val.
 	((t > 0.0) and: [ loop_time > loop_dur val]) ifTrue: [
-		loop_time := loop_time - t.
-		[ loop_time > t ] whileTrue: [ loop_time := loop_time - t ].
+		[ loop_time := loop_time - t.  loop_time > t ] whileTrue.
 		v := start val + (loop_time * dx_dt val).
 	].
 
@@ -85,6 +84,12 @@ ZoftLoopGuts >> privatelySetStartZoft: stZoft [
 
 	start := stZoft.
 	^ self
+]
+
+{ #category : #controlling }
+ZoftLoopGuts >> restartLoop [
+
+	natal := true.
 ]
 
 { #category : #accessing }
