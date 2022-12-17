@@ -167,7 +167,8 @@ Loopervisor >> spinGloriously: target_loop_dur [
 			whileTrue: [ | befo_t dt |
 				befo_t := self class absoluteTime.
 				self oneDelightfulTurn.
-				dt := target_loop_dur - (self class absoluteTime - befo_t).
+				dt := self class absoluteTime - befo_t.
+				dt := target_loop_dur - dt.
 				(dt > 0)
 					ifTrue: [ (Delay forSeconds: dt) wait ].
 			].

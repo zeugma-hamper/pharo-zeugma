@@ -17,7 +17,7 @@ EventAqueduct >> appendEvent: evt [
 { #category : #accessing }
 EventAqueduct >> appendPhage: phg [
 
-	phages nextPut: phg.
+	phages add: phg.
 ]
 
 { #category : #'event-distribution' }

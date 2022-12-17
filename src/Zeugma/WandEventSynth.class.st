@@ -15,6 +15,14 @@ WandEventSynth >> initialize [
 ]
 
 { #category : #synthesizing }
+WandEventSynth >> interpretRawWandish: pntrNm buttonBits: bbits caressDict: crss pos: p aim: a over: o [
+
+	^ self interpretRawWandish: pntrNm buttonBits: bbits caressDict: crss
+								pos: p aim: a over: o
+								naes: nil camera: nil hit: nil.
+]
+
+{ #category : #synthesizing }
 WandEventSynth >> interpretRawWandish: pntrNm buttonBits: bbits caressDict: crsdct
 						pos: p aim: a over: o
 						naes: m camera: cam hit: hVect [
@@ -80,12 +88,4 @@ WandEventSynth >> interpretRawWandish: pntrNm buttonBits: bbits caressDict: crsd
 
 	state_by_prov at: pntrNm put: { bbits . true }.
 	^ outevs.
-]
-
-{ #category : #synthesizing }
-WandEventSynth >> interpretRawWandish: pntrNm buttonBits: bbits caressList: crss pos: p aim: a over: o [
-
-	^ self interpretRawWandish: pntrNm buttonBits: bbits caressDict: crss
-								pos: p aim: a over: o
-								naes: nil camera: nil hit: nil.
 ]

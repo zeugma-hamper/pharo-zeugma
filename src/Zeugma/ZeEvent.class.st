@@ -39,7 +39,7 @@ ZeEvent >> adoptParticularsFrom: otha [
 { #category : #'event-routing' }
 ZeEvent >> deliverySelector [
 
-	self class classSideDeliverySelector
+	^ self class classSideDeliverySelector
 ]
 
 { #category : #accessing }
