@@ -9,6 +9,12 @@ Class {
 	#category : #'Zeugma-EventImport'
 }
 
+{ #category : #running }
+CommsSump >> attendToIncoming [
+
+	self subclassResponsibility
+]
+
 { #category : #'processing-and-dispatch' }
 CommsSump >> dispatch: evt viaAddr: addr [
 	| aqs |
@@ -62,6 +68,12 @@ CommsSump >> rawExtractionViaAddr: addr payload: pyld [
 		ifTrue: [ ^ (rawex_by_address at: addr) value: pyld ].
 
 	^ pyld
+]
+
+{ #category : #running }
+CommsSump >> suspendAttention [
+
+	self subclassResponsibility
 ]
 
 { #category : #'processing-and-dispatch' }
