@@ -35,7 +35,7 @@ ZoftGuts >> isFreshFor: ratch [
 ZoftGuts >> puppeteerHosts: v [
 
 	zt_hosts do: [ :zth |
-		zth ifNotNil: [ zth setVal: v ]
+		zth ifNotNil: [ zth privatelySetVal: v ]
 	].
 ]
 
