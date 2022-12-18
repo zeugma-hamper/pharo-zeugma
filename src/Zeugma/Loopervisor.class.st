@@ -5,9 +5,9 @@ Class {
 		'grand_ratchet',
 		'recentest_time',
 		'start_t',
+		'active_sumps',
 		'active_aqueducts',
 		'active_lungs',
-		'active_sumps',
 		'active_toilers',
 		'proc',
 		'now_looping'
@@ -50,9 +50,27 @@ Loopervisor >> appendToiler: ler [
 ]
 
 { #category : #accessing }
+Loopervisor >> aqueductNamed: nm [
+
+	^ active_aqueducts detect: [ :du | du name = nm ] ifNone: nil
+]
+
+{ #category : #accessing }
 Loopervisor >> aqueducts [
 
 	^ active_aqueducts copy
+]
+
+{ #category : #accessing }
+Loopervisor >> assuredZoftLung [
+	| zl |
+
+	(zl := self lungNamed: 'VelvetLung')
+		ifTrue: [ ^ zl ].
+	zl := IronLung new.
+	zl setName: 'VelvetLung'.
+	self appendLung: zl.
+	^ zl
 ]
 
 { #category : #looping }
@@ -94,6 +112,12 @@ Loopervisor >> initialize [
 	active_lungs := OrderedCollection new.
 	active_sumps := OrderedCollection new.
 	active_toilers := OrderedCollection new.
+]
+
+{ #category : #accessing }
+Loopervisor >> lungNamed: nm [
+
+	^ active_lungs detect: [ :lu | lu name = nm ] ifNone: nil
 ]
 
 { #category : #accessing }
@@ -178,9 +202,21 @@ Loopervisor >> spinGloriously: target_loop_dur [
 ]
 
 { #category : #accessing }
+Loopervisor >> sumpNamed: nm [
+
+	^ active_sumps detect: [ :um | um name = nm ] ifNone: nil
+]
+
+{ #category : #accessing }
 Loopervisor >> sumps [
 
 	^ active_sumps copy
+]
+
+{ #category : #accessing }
+Loopervisor >> toilerNamed: nm [
+
+	^ active_toilers detect: [ :oi | oi name = nm ] ifNone: nil
 ]
 
 { #category : #accessing }
@@ -195,4 +231,10 @@ Loopervisor >> travail: ratch atTime: thyme [
 	active_toilers ifNotNil: [
 		active_toilers do: [ :wrkr | wrkr travail: ratch atTime: thyme ]
 	].
+]
+
+{ #category : #accessing }
+Loopervisor >> unsecuredZoftLung [
+
+	^ self lungNamed: 'VelvetLung'
 ]

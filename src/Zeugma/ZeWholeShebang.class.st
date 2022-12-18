@@ -57,6 +57,8 @@ ZeWholeShebang class >> canonicalInstance [
 		novo appendMaes: ma.
 	].
 
+	novo assuredZoftLung. "also returns it, though here we're ignoring."
+
 	spa := SpatialAqueduct new.
 	spa appendPhage: novo.
 	novo loopervisor appendAqueduct: spa.

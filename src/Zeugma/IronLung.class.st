@@ -39,6 +39,7 @@ IronLung >> inhale: ratch atTime: thyme [
 	[ aspirants isEmpty ] whileFalse:
 		[ breathees add: aspirants next ].
 
+	dedcnt := 0.
 	breathees do: [ :z |
 		z ifNil: [ dedcnt := dedcnt + 1 ]
 			ifNotNil: [ z inhale: ratch atTime: thyme ]
@@ -58,7 +59,8 @@ IronLung >> inhale: ratch atTime: thyme [
 { #category : #initialization }
 IronLung >> initialize [
 
-	breathees := OrderedCollection new.
+	super initialize.
+	breathees := WeakOrderedCollection new.
 	aspirants := SharedQueue new.
 	expirees := SharedQueue new.
 ]
@@ -69,8 +71,12 @@ IronLung >> removeBreathee: zeub [
 
 	urn := false.
 	zeub ifNil: [ ^ false ].
-	(aspirants contents includes: zeub) ifTrue: [
-		aspirants remove: zeub.
+	(aspirants contents includes: zeub) ifTrue: [ | tmp |
+		"aspirants remove: zeub."  "no #remove: for a SharedQueue... so,"
+		tmp := aspirants contents.
+		aspirants removeAll.
+		tmp remove: zeub.
+		tmp do: [ :z | aspirants nextPut: z ].
 		urn := true
 	].
 
