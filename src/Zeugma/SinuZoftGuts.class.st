@@ -39,9 +39,9 @@ SinuZoftGuts >> inhale: ratch atTime: thyme [
 	z_cent ifNotNil: [ z_cent inhale: ratch atTime: thyme ].
 	z_phas ifNotNil: [ z_ampl inhale: ratch atTime: thyme ].
 
-	v := 2.0 * Float pi * z_freq val.
+	v := 2.0 * Float pi * z_freq val * thyme.
 	z_phas ifNotNil: [ v := v + z_phas val ].
-	v := v sin.
+	v := z_ampl val * v sin.
 	z_cent ifNotNil: [ v := v + z_cent val ].
 
 	self puppeteerHosts: v.

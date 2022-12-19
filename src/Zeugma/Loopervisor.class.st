@@ -66,7 +66,7 @@ Loopervisor >> assuredZoftLung [
 	| zl |
 
 	(zl := self lungNamed: 'VelvetLung')
-		ifTrue: [ ^ zl ].
+		ifNotNil: [ ^ zl ].
 	zl := IronLung new.
 	zl setName: 'VelvetLung'.
 	self appendLung: zl.
@@ -135,7 +135,7 @@ Loopervisor >> onceMoreUntoTheBreath [
 	self freshenTimestamps.
 
 	active_lungs do: [ :lung |
-		lung inhale: grand_ratchet attime: recentest_time
+		lung inhale: grand_ratchet atTime: recentest_time
 	].
 ]
 
