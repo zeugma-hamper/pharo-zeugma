@@ -24,6 +24,8 @@ TrGrappler >> inhale: ratch atTime: thyme [
 	| tr |
 
 	super inhale: ratch atTime: thyme.
+	(trans_zoft isFreshFor: ratch) "probably redundant, but..."
+		ifFalse: [ trans_zoft inhale: ratch atTime: thyme ].
 	tr := trans_zoft val.
 	pm loadTranslation: tr.
 	ipm loadTranslation: tr neg.
