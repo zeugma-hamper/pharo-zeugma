@@ -21,32 +21,38 @@ Cursoresque class >> initialize [
 ]
 
 { #category : #'instance creation' }
-Cursoresque class >> new: nSpikes [
+Cursoresque class >> new: nVerts [
 	| novo |
 
 	novo := self basicNew.
-	novo initialize: nSpikes.
+	novo initialize: nVerts.
 	^ novo
 ]
 
 { #category : #'instance creation' }
-Cursoresque class >> new: nSpikes size: sz [
+Cursoresque class >> new: nVerts size: sz [
 	| novo |
 
 	novo := self basicNew.
-	novo initialize: nSpikes size: sz.
+	novo initialize: nVerts size: sz.
 	^ novo
 ]
 
-{ #category : #initialization }
-Cursoresque >> initialize [
+{ #category : #respiration }
+Cursoresque >> inhale: ratch atTime: thyme [
+	| vees |
 
-	super initialize.
-	loc_zft := Zoft newWith: (Vect zeroOfDim: 3).
-	sca_zft := Zoft newWith: (Vect onesOfDim: 3).
-	ovr := Vect xAxis.
-	upp := Vect yAxis.
-	nrm := Vect zAxis.
+	super inhale: ratch atTime: thyme.
+
+	vees := Array new: num_verts.
+	verts_lrg withIndexDo: [ :v :i | vees at: i put: ((v x) @ (v y)) ].
+	poly_lrg setVertices: vees.
+
+	vees := Array new: num_verts.
+	verts_sml withIndexDo: [ :v :i | vees at: i put: ((v x) @ (v y)) ].
+	poly_sml setVertices: vees.
+
+	^ 0
 ]
 
 { #category : #initialization }
@@ -57,9 +63,12 @@ Cursoresque >> initialize: nVerts size: sz [
 	num_verts := nVerts.
 	verts_lrg := Array new: nVerts.
 	verts_sml := Array new: nVerts.
+
 	poly_lrg := PolygonMorph new.
-	poly_sml := PolygonMorph new.
-	poly_lrg addMorph: poly_sml.
+	poly_lrg addMorph: (poly_sml := PolygonMorph new).
+
+	poly_lrg beStraightSegments.
+	poly_sml beStraightSegments.
 
 	0 to: 1 do: [ :w |
 		0 to: 2 * nVerts - 1 do: [ :q |

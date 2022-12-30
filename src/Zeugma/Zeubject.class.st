@@ -74,19 +74,22 @@ Zeubject >> saccess: key put: val [
 { #category : #respiration }
 Zeubject >> setBreather: br [
 
-	self saccess: #irlu put: br
+	self saccess: #irlu put: br.
+	^ self
 ]
 
 { #category : #sac }
 Zeubject >> setName: nm [
 
-	self saccess: #name put: nm
+	self saccess: #name put: nm.
+	^ self
 ]
 
 { #category : #respiration }
 Zeubject >> setRatchet: rat [
 
 	rat_fresh := rat.
+	^ self
 ]
 
 { #category : #toiling }

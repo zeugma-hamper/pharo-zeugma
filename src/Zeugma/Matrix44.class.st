@@ -86,6 +86,26 @@ Matrix44 class >> translationX: tx Y: ty Z: tz [
 ]
 
 { #category : #arithmetic }
+Matrix44 >> * otha [
+
+	^ otha isNumber
+		ifTrue: [ self scale: otha ]
+		ifFalse: [ self mult: otha ].
+]
+
+{ #category : #arithmetic }
+Matrix44 >> + othaMat [
+
+	^ self add: othaMat
+]
+
+{ #category : #arithmetic }
+Matrix44 >> - othaMat [
+
+	^ self sub: othaMat
+]
+
+{ #category : #arithmetic }
 Matrix44 >> add: b [
 
 	| a arr |

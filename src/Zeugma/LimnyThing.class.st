@@ -3,9 +3,21 @@ Class {
 	#superclass : #Zeubject,
 	#instVars : [
 		'limn_flags',
-		'cumuMats',
+		'cumu_mats',
 		'adj_iro',
 		'cumu_adjc'
 	],
 	#category : #'Zeugma-SpatialStructure'
 }
+
+{ #category : #'cumulative transforms' }
+LimnyThing >> currentCumuMats [
+
+	^ cumu_mats
+]
+
+{ #category : #'cumulative transforms' }
+LimnyThing >> dependCumuMatsFrom: cm_above [
+
+	^ (cumu_mats := cm_above)
+]

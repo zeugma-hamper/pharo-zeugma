@@ -114,6 +114,12 @@ Loopervisor >> initialize [
 	active_toilers := OrderedCollection new.
 ]
 
+{ #category : #looping }
+Loopervisor >> isLooping [
+
+	^ now_looping
+]
+
 { #category : #accessing }
 Loopervisor >> lungNamed: nm [
 
