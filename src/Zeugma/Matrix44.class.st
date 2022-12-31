@@ -358,6 +358,8 @@ Matrix44 >> loadRotationNormedAxis: axs angle: ang about: cnt [
 { #category : #transformations }
 Matrix44 >> loadScale: s [
 
+	s isNumber ifFalse: [ ^ self loadScaleX: s x Y: s y Z: s z ].
+
 	self loadIdent;
 		m00: s;  m11: s;  m22: s.
 	^ self
@@ -368,6 +370,9 @@ Matrix44 >> loadScale: s [
 { #category : #transformations }
 Matrix44 >> loadScale: s about: cnt [
 	| t |
+
+	s isNumber ifFalse: [ ^ self loadScaleX: s x Y: s y Z: s z about: cnt ].
+
 	t := 1 - s.
 
 	self loadIdent.

@@ -22,11 +22,8 @@ Cursoresque class >> initialize [
 
 { #category : #'instance creation' }
 Cursoresque class >> new: nVerts [
-	| novo |
 
-	novo := self basicNew.
-	novo initialize: nVerts.
-	^ novo
+	^ self new: nVerts size: 100.0
 ]
 
 { #category : #'instance creation' }
@@ -38,6 +35,12 @@ Cursoresque class >> new: nVerts size: sz [
 	^ novo
 ]
 
+{ #category : #'instance creation' }
+Cursoresque class >> newOfSize: sz [
+
+	^ self new: 6 size: sz
+]
+
 { #category : #respiration }
 Cursoresque >> inhale: ratch atTime: thyme [
 	| vees |
@@ -45,11 +48,11 @@ Cursoresque >> inhale: ratch atTime: thyme [
 	super inhale: ratch atTime: thyme.
 
 	vees := Array new: num_verts.
-	verts_lrg withIndexDo: [ :v :i | vees at: i put: ((v x) @ (v y)) ].
+	verts_lrg withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
 	poly_lrg setVertices: vees.
 
 	vees := Array new: num_verts.
-	verts_sml withIndexDo: [ :v :i | vees at: i put: ((v x) @ (v y)) ].
+	verts_sml withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
 	poly_sml setVertices: vees.
 
 	^ 0
@@ -71,8 +74,8 @@ Cursoresque >> initialize: nVerts size: sz [
 	poly_sml beStraightSegments.
 
 	0 to: 1 do: [ :w |
-		0 to: 2 * nVerts - 1 do: [ :q |
-			theeta := 2 * Float pi / nVerts * q + (w * Float pi).
+		0 to: nVerts - 1 do: [ :q |
+			theeta := Float pi / nVerts * q + (w * Float pi).
 			radial := (Vect xAxis * theeta cos + (Vect yAxis * theeta sin))
 				* 0.5 * (w + 1).
 			arm := SinuZoft
@@ -80,7 +83,13 @@ Cursoresque >> initialize: nVerts size: sz [
 				andFrequency: 0.8 + (0.11 * randy next)
 				andCenter: radial * sz * 0.24 * (1 + (3 * (q % 2))).
 			(w > 0  ifTrue: [ verts_lrg ]  ifFalse: [ verts_sml ])
-				at: q put: arm.
+				at: q+1 put: arm.
 		]
 	].
+]
+
+{ #category : #accessing }
+Cursoresque >> morph [
+
+	^ poly_lrg
 ]

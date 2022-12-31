@@ -10,7 +10,8 @@ Class {
 		'active_lungs',
 		'active_toilers',
 		'proc',
-		'now_looping'
+		'now_looping',
+		'target_loop_dur'
 	],
 	#category : #'Zeugma-TemporalStructure'
 }
@@ -62,13 +63,23 @@ Loopervisor >> aqueducts [
 ]
 
 { #category : #accessing }
+Loopervisor >> assuredDefaultLung [
+	| zl |
+
+	(zl := self lungNamed: 'omni-lung')
+		ifNotNil: [ ^ zl ].
+	(zl := IronLung new) setName: 'omni-lung'.
+	self appendLung: zl.
+	^ zl
+]
+
+{ #category : #accessing }
 Loopervisor >> assuredZoftLung [
 	| zl |
 
-	(zl := self lungNamed: 'VelvetLung')
+	(zl := self lungNamed: 'velvet-lung')
 		ifNotNil: [ ^ zl ].
-	zl := IronLung new.
-	zl setName: 'VelvetLung'.
+	(zl := IronLung new) setName: 'velvet-lung'.
 	self appendLung: zl.
 	^ zl
 ]
@@ -189,8 +200,11 @@ Loopervisor >> removeToiler: toi [
 ]
 
 { #category : #looping }
-Loopervisor >> spinGloriously: target_loop_dur [
+Loopervisor >> spinGloriously: targetLDur [
 
+	now_looping ifTrue: [ ^ self ].
+
+	target_loop_dur := targetLDur.
 	proc := [
 		now_looping := true.
 		[ now_looping ]
@@ -204,7 +218,7 @@ Loopervisor >> spinGloriously: target_loop_dur [
 			].
 		now_looping := false.
 		proc := nil.
-	] forkAt: Processor userBackgroundPriority
+	] forkAt: Processor userBackgroundPriority.
 ]
 
 { #category : #accessing }
@@ -217,6 +231,12 @@ Loopervisor >> sumpNamed: nm [
 Loopervisor >> sumps [
 
 	^ active_sumps copy
+]
+
+{ #category : #looping }
+Loopervisor >> targetLoopDur [
+
+	^ target_loop_dur
 ]
 
 { #category : #accessing }
@@ -240,7 +260,13 @@ Loopervisor >> travail: ratch atTime: thyme [
 ]
 
 { #category : #accessing }
+Loopervisor >> unsecuredDefaultLung [
+
+	^ self lungNamed: 'omni-lung'
+]
+
+{ #category : #accessing }
 Loopervisor >> unsecuredZoftLung [
 
-	^ self lungNamed: 'VelvetLung'
+	^ self lungNamed: 'velvet-lung'
 ]

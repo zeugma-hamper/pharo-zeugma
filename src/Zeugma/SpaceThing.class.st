@@ -10,7 +10,7 @@ Class {
 { #category : #grapplers }
 SpaceThing >> appendGrappler: gr [
 
-	gr ifNotNil: [ gr_pile appendGrappler: gr ].
+	gr ifNotNil: [ self assuredGrapplerPile appendGrappler: gr ].
 ]
 
 { #category : #grapplers }
@@ -42,7 +42,7 @@ SpaceThing >> dependCumuMatsFrom: cmAbove [
 { #category : #grapplers }
 SpaceThing >> findGrappler: nameStr [
 
-	nameStr ifNotNil: [ ^ gr_pile findGrappler: nameStr ].
+	gr_pile ifNotNil: [ ^ gr_pile findGrappler: nameStr ].
 	^ nil
 ]
 
@@ -58,7 +58,7 @@ SpaceThing >> inhale: ratch atTime: thyme [
 { #category : #grapplers }
 SpaceThing >> prependGrappler: gr [
 
-	gr ifNotNil: [ gr_pile prependGrappler: gr ].
+	gr ifNotNil: [ self assuredGrapplerPile prependGrappler: gr ].
 ]
 
 { #category : #grapplers }

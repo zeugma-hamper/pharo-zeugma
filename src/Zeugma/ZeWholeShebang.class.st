@@ -47,9 +47,15 @@ Class {
 
 { #category : #'instance creation' }
 ZeWholeShebang class >> canonicalInstance [
-	| novo ma spa owa |
 
-	canonical_instance ifNotNil: [ ^ canonical_instance ].
+	canonical_instance
+		ifNil: [ canonical_instance := self newDefaultInstance ].
+	^ canonical_instance
+]
+
+{ #category : #'instance creation' }
+ZeWholeShebang class >> newDefaultInstance [
+	| novo ma spa owa |
 
 	novo := self new.
 	PlatonicMaes sampleMaesConfig do: [ :mdic |
@@ -57,7 +63,9 @@ ZeWholeShebang class >> canonicalInstance [
 		novo appendMaes: ma.
 	].
 
-	novo loopervisor assuredZoftLung. "also returns it, though here: ignoring."
+	novo loopervisor assuredZoftLung.
+	"ignoring answered val of foregoing for creation side-effect. keyed as <velvet-lung>"
+	novo loopervisor assuredDefaultLung. "ditto; this one's keyed as <omni-lung>"
 
 	spa := SpatialAqueduct new.
 	spa appendPhage: novo.
@@ -74,7 +82,6 @@ ZeWholeShebang class >> canonicalInstance [
 	owa forAddress: '/events/spatial' appendAqueduct: spa.
 	novo loopervisor appendSump: owa.
 
-	canonical_instance := novo.
 	^ novo
 ]
 

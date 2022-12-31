@@ -1,7 +1,7 @@
 Class {
 	#name : #GrapplerPile,
 	#superclass : #Grappler,
-	#classVars : [
+	#instVars : [
 		'graps',
 		'inm',
 		'ipm',
@@ -61,7 +61,7 @@ GrapplerPile >> inhale: ratch atTime: thyme [
 	nm := gr nrmMat.
 	inm := gr invNrmMat.
 
-	2 to num do: [ :q |
+	2 to: num do: [ :q |
 		gr := graps at: q.
 		gr inhale: ratch atTime: thyme.
 		pm multAccum: gr pntMat.

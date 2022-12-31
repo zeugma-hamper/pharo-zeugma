@@ -45,6 +45,18 @@ ScGrappler >> inhale: ratch atTime: thyme [
 	^ 0
 ]
 
+{ #category : #initialization }
+ScGrappler >> initialize [
+
+	super initialize.
+	pm := Matrix44 newIdent.
+	ipm := Matrix44 newIdent.
+	nm := Matrix44 newIdent.
+	inm := Matrix44 newIdent.
+	scale_zoft := Zoft newWith: (Vect onesOfDim: 3).
+	center_zoft := Zoft newWith: (Vect zeroOfDim: 3).
+]
+
 { #category : #accessing }
 ScGrappler >> installCenter: cz [
 
