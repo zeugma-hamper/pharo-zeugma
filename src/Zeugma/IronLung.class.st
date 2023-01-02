@@ -45,8 +45,8 @@ IronLung >> inhale: ratch atTime: thyme [
 			ifNotNil: [ z inhale: ratch atTime: thyme ]
 	].
 
-	(dedcnt  >  (breathees size / 2))
-		ifTrue: [  ].  "compact?"
+	(dedcnt > (breathees size / 2)  or:  [ dedcnt > 150 ])
+		ifTrue: [ breathees removeAllSuchThat: [ :z | z isNil ] ].  "compact!"
 
 	[ expirees isEmpty ] whileFalse:
 		[ breathees remove: expirees next ].
