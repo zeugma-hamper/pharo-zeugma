@@ -75,9 +75,9 @@ Cursoresque >> initialize: nVerts size: sz [
 
 	0 to: 1 do: [ :w |
 		0 to: nVerts - 1 do: [ :q |
-			theeta := Float pi / nVerts * q + (w * Float pi).
+			theeta := 2.0 * Float pi / nVerts * q + (w * Float pi).
 			radial := (Vect xAxis * theeta cos + (Vect yAxis * theeta sin))
-				* 0.5 * (w + 1).
+				* 0.5 * (0.85 * w + 1).
 			arm := SinuZoft
 				newWithAmplitude: radial * sz * 0.065
 				andFrequency: 0.8 + (0.11 * randy next)

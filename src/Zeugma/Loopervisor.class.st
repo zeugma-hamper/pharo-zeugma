@@ -200,6 +200,12 @@ Loopervisor >> removeToiler: toi [
 ]
 
 { #category : #looping }
+Loopervisor >> setTargetLoopDur: tld [
+
+	target_loop_dur := tld
+]
+
+{ #category : #looping }
 Loopervisor >> spinGloriously: targetLDur [
 
 	now_looping ifTrue: [ ^ self ].
