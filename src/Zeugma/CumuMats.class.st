@@ -9,7 +9,7 @@ Class {
 		'rat_fresh',
 		'valid'
 	],
-	#category : #'Zeugma-SpatialStructure'
+	#category : #'Zeugma-Foundation'
 }
 
 { #category : #'instance creation' }
