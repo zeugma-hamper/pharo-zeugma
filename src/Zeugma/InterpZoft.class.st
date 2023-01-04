@@ -10,8 +10,8 @@ InterpZoft class >> newWithPointA: aZoft andPointB: bZoft [
 
 	z := Zoft privateNew.
 	g := InterpZoftGuts new
-			installPointAZoft: aZoft;
-			installPointBZoft: bZoft.
+			installPointAZoft: (Zoft zoftenIfNotOne: aZoft);
+			installPointBZoft: (Zoft zoftenIfNotOne: bZoft).
 	z privatelySetGuts: g.
 	^ z
 ]

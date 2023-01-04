@@ -17,6 +17,12 @@ ZoftGuts >> appendHost: aZoft [
 	zt_hosts add: aZoft.
 ]
 
+{ #category : #'zoft-hosts' }
+ZoftGuts >> hosts [
+
+	^ zt_hosts
+]
+
 { #category : #initialization }
 ZoftGuts >> initialize [
 
