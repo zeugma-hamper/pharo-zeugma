@@ -755,7 +755,7 @@ Matrix44 >> xformVect: v [
 
 	| a |
 	a := self.
-	^ Vect newx: (a m00 * v x) + (a m10 * v y) + (a m20 * v z) + a m30
+	^ Vect x: (a m00 * v x) + (a m10 * v y) + (a m20 * v z) + a m30
 				y: (a m01 * v x) + (a m11 * v y) + (a m21 * v z) + a m31
 				z: (a m02 * v x) + (a m12 * v y) + (a m22 * v z) + a m32
 

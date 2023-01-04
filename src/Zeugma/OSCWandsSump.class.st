@@ -25,9 +25,9 @@ OSCWandsSump >> oscToWandArgs: osc [
 	osc size = 11 ifFalse: [ ^ nil ].
 	prov := osc at: 1.
 	butts := osc at: 2.
-	pos := Vect newx: (osc at: 3) y: (osc at: 4) z: (osc at: 5).
-	aim := Vect newx: (osc at: 6) y: (osc at: 7) z: (osc at: 8).
-	ovr := Vect newx: (osc at: 9) y: (osc at: 10) z: (osc at: 11).
+	pos := Vect x: (osc at: 3) y: (osc at: 4) z: (osc at: 5).
+	aim := Vect x: (osc at: 6) y: (osc at: 7) z: (osc at: 8).
+	ovr := Vect x: (osc at: 9) y: (osc at: 10) z: (osc at: 11).
 
 	(point_mat isNotNil  &  direc_mat isNotNil) ifTrue: [
 		pos := point_mat xformVect: pos.
