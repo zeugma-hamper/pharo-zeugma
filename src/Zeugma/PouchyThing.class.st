@@ -73,6 +73,12 @@ PouchyThing >> insertChild: zeub at: ind [
 	^ true
 ]
 
+{ #category : #testing }
+PouchyThing >> isZeugmallyPouchful [
+
+	^ true
+]
+
 { #category : #children }
 PouchyThing >> nthChild: ind [
 

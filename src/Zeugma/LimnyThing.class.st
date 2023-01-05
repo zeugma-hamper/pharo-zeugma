@@ -1,6 +1,8 @@
 Class {
 	#name : #LimnyThing,
 	#superclass : #PouchyThing,
+	#traits : 'Limnable',
+	#classTraits : 'Limnable classTrait',
 	#instVars : [
 		'limn_flags',
 		'cumu_mats',

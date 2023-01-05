@@ -41,6 +41,18 @@ Zeubject >> isFreshFor: ratch [
 	^ rat_fresh = ratch
 ]
 
+{ #category : #testing }
+Zeubject >> isZeugmallyLimnable [
+
+	^ false
+]
+
+{ #category : #testing }
+Zeubject >> isZeugmallyPouchful [
+
+	^ false
+]
+
 { #category : #sac }
 Zeubject >> name [
 

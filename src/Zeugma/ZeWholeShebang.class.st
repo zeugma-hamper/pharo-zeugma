@@ -32,8 +32,8 @@ loo oneDelightfulTurn.
 Class {
 	#name : #ZeWholeShebang,
 	#superclass : #Zeubject,
-	#traits : 'ZESpatialPhagy',
-	#classTraits : 'ZESpatialPhagy classTrait',
+	#traits : 'ZESpatialPhagy + RecursiveLimner',
+	#classTraits : 'ZESpatialPhagy classTrait + RecursiveLimner classTrait',
 	#instVars : [
 		'looper',
 		'maeses',
