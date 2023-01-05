@@ -1,6 +1,6 @@
 Class {
 	#name : #LimnyThing,
-	#superclass : #Zeubject,
+	#superclass : #PouchyThing,
 	#instVars : [
 		'limn_flags',
 		'cumu_mats',

@@ -106,11 +106,11 @@ RoGrappler >> inhale: ratch atTime: thyme [
 	| ax an ce ph |
 
 	super inhale: ratch atTime: thyme.
-
 	axis_zoft inhale: ratch atTime: thyme.
 	ax := axis_zoft val normed.
 	angle_zoft inhale: ratch atTime: thyme.
 	an := angle_zoft val.
+
 	center_zoft ifNotNil: [ center_zoft inhale: ratch atTime: thyme. ].
 	phase_zoft
 		ifNil: [ ph := 0.0 ]
