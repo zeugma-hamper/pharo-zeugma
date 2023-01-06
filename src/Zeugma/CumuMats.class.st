@@ -1,6 +1,6 @@
 Class {
 	#name : #CumuMats,
-	#superclass : #ProtoObject,
+	#superclass : #Object,
 	#instVars : [
 		'pmat',
 		'nmat',
@@ -25,7 +25,7 @@ CumuMats class >> new: people_the_isle_with_calibans [
 	 four component matrices (with identity) or leave them as
 	 nil and naked as the day they were born, which is today."
 
-	novo := self new.
+	novo := self basicNew initialize.
 	people_the_isle_with_calibans ifTrue: [
 		idm := Matrix44 new.
 		novo freshenVia: idm and: idm and: idm and: idm
