@@ -109,10 +109,56 @@ PlatonicMaes class >> sampleMaesConfigJSON [
 ]'
 ]
 
+{ #category : #layers }
+PlatonicMaes >> appendLayer: lay [
+
+	lay ifNil: [ ^ false ].
+	layers
+		ifNil: [ layers := OrderedCollection new ]
+		ifNotNil: [ (layers includes: lay) ifTrue: [ ^ false ] ].
+	layers add: lay.
+	^ true
+]
+
+{ #category : #layers }
+PlatonicMaes >> findLayer: nameStr [
+
+	layers ifNil: [ ^ nil ].
+	^ layers detect: [ :lay | lay name = nameStr ] ifNone: [ nil ]
+]
+
 { #category : #accessing }
 PlatonicMaes >> height [
 
 	^ hei
+]
+
+{ #category : #layers }
+PlatonicMaes >> indexForLayer: lay [
+
+	(layers isNil or: [ lay isNil ])
+		ifTrue: [ ^ -1 ].
+	layers doWithIndex: [ :l :ind | l == lay ifTrue: [^ ind ] ].
+	^ -1
+]
+
+{ #category : #layers }
+PlatonicMaes >> insertLayer: lay at: ind [
+
+	lay ifNil: [ ^ false ].
+	layers
+		ifNil: [ layers := OrderedCollection new ]
+		ifNotNil: [ (layers includes: lay) ifTrue: [ ^ false ] ].
+	layers add: lay beforeIndex: ind.
+	^ true
+]
+
+{ #category : #accessing }
+PlatonicMaes >> layerCount [
+
+	^ layers
+			ifNil: [ 0 ]
+			ifNotNil: [ layers size ]
 ]
 
 { #category : #accessing }
@@ -131,6 +177,15 @@ PlatonicMaes >> loc [
 PlatonicMaes >> over [
 
 	^ ovr
+]
+
+{ #category : #layers }
+PlatonicMaes >> removeLayer: lay [
+
+	(layers isNil or: [ lay isNil ])
+		ifTrue: [ ^ false ].
+	layers remove: lay ifAbsent: [ ^ false ].
+	^ true
 ]
 
 { #category : #accessing }

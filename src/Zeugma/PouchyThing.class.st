@@ -68,7 +68,7 @@ PouchyThing >> insertChild: zeub at: ind [
 
 	zeub ifNil: [ ^ false ].
 	chirrens ifNil: [ chirrens := OrderedCollection new ].
-	(chirrens contains: zeub) ifTrue: [ ^ false ].
+	(chirrens includes: zeub) ifTrue: [ ^ false ].
 	chirrens add: zeub beforeIndex: ind.
 	^ true
 ]

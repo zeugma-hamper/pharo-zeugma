@@ -100,6 +100,28 @@ ZeWholeShebang >> attendToIncomingComms [
 	]
 ]
 
+{ #category : #drawing }
+ZeWholeShebang >> drawMaesLayers: ratch [
+	| cm |
+
+	maeses ifNil: [ ^ self ].
+	cm := CumuMats new.
+	maeses do: [ :ma |
+		(ma layerCount > 0) ifTrue: [
+			ma layers do: [ :lay |
+				self recursivelyDraw: lay atRatchet: ratch
+					withCumuMats: cm andAdjColor: nil.
+			]
+		]
+	]
+]
+
+{ #category : #accessing }
+ZeWholeShebang >> findMaes: nameStr [
+
+	^ maeses detect: [ :ma | ma name = nameStr ] ifNone: [ nil ]
+]
+
 { #category : #initialization }
 ZeWholeShebang >> initialize [
 
@@ -158,6 +180,13 @@ ZeWholeShebang >> suspendIncomingCommsAttention [
 	self loopervisor sumps do: [ :smp |
 		smp suspendAttention
 	]
+]
+
+{ #category : #travailing }
+ZeWholeShebang >> travail: ratch atTime: thyme [
+
+	self drawMaesLayers: ratch.
+	^ 0
 ]
 
 { #category : #'event-phagy' }

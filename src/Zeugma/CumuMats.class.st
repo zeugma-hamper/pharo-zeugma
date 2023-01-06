@@ -48,3 +48,19 @@ CumuMats >> initialize [
 	super initialize.
 	rat_fresh := -1.
 ]
+
+{ #category : #transforming }
+CumuMats >> xformPointLocalToWorld: p [
+
+	^ pmat
+		ifNil: [ p ]
+		ifNotNil: [ pmat xformVect: p ]
+]
+
+{ #category : #transforming }
+CumuMats >> xformPointWorldToLocal: p [
+
+	^ ipmat
+		ifNil: [ p ]
+		ifNotNil: [ ipmat xformVect: p ]
+]

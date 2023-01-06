@@ -43,7 +43,7 @@ Loopervisor >> appendSump: s [
 	active_sumps addIfNotPresent: s.
 ]
 
-{ #category : #accessing }
+{ #category : #toiling }
 Loopervisor >> appendToiler: ler [
 
 	ler	 ifNil: [ ^self ].
@@ -122,7 +122,7 @@ Loopervisor >> initialize [
 	active_aqueducts := OrderedCollection new.
 	active_lungs := OrderedCollection new.
 	active_sumps := OrderedCollection new.
-	active_toilers := OrderedCollection new.
+	active_toilers := WeakOrderedCollection new.
 ]
 
 { #category : #looping }
@@ -178,25 +178,25 @@ Loopervisor >> recentestTime [
 { #category : #accessing }
 Loopervisor >> removeAqueduct: aq [
 
-	active_aqueducts remove: aq ifAbsent: [ nil ].
+	active_aqueducts remove: aq ifAbsent: [ ].
 ]
 
 { #category : #accessing }
 Loopervisor >> removeLung: ell [
 
-	active_lungs remove: ell ifAbsent: [ nil ].
+	active_lungs remove: ell ifAbsent: [ ].
 ]
 
 { #category : #accessing }
 Loopervisor >> removeSump: s [
 
-	active_sumps remove: s ifAbsent: [ nil ].
+	active_sumps remove: s ifAbsent: [ ].
 ]
 
-{ #category : #accessing }
+{ #category : #toiling }
 Loopervisor >> removeToiler: toi [
 
-	active_toilers remove: toi ifAbsent: [ nil ].
+	active_toilers remove: toi ifAbsent: [ ].
 ]
 
 { #category : #looping }
@@ -251,7 +251,7 @@ Loopervisor >> toilerNamed: nm [
 	^ active_toilers detect: [ :oi | oi name = nm ] ifNone: nil
 ]
 
-{ #category : #accessing }
+{ #category : #toiling }
 Loopervisor >> toilers [
 
 	^ active_toilers copy
@@ -259,10 +259,19 @@ Loopervisor >> toilers [
 
 { #category : #toiling }
 Loopervisor >> travail: ratch atTime: thyme [
+	| ded_cnt |
 
-	active_toilers ifNotNil: [
-		active_toilers do: [ :wrkr | wrkr travail: ratch atTime: thyme ]
+	active_toilers ifNil: [ ^ 0 ].
+	ded_cnt := 0.
+	active_toilers do: [ :wrkr |
+		wrkr ifNil: [ ded_cnt := 1 + ded_cnt ]
+			ifNotNil:  [ wrkr travail: ratch atTime: thyme ].
 	].
+
+	ded_cnt > (active_toilers size / 2)
+		ifTrue: [ active_toilers removeAllSuchThat: [ :z | z isNil ] ].
+
+	^ 0
 ]
 
 { #category : #accessing }

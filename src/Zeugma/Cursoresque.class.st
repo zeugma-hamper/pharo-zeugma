@@ -41,11 +41,28 @@ Cursoresque class >> newOfSize: sz [
 	^ self new: 6 size: sz
 ]
 
+{ #category : #'as yet unclassified' }
+Cursoresque >> drawSelfAtRatch: ratch withCumuMats: cm andAdjColor: adjc [
+	| vees |
+
+	vees := Array new: num_verts.
+	verts_lrg withIndexDo: [ :v :i | vees at: i put: (cm xformPointLocalToWorld: v) ].
+	vees withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
+	poly_lrg setVertices: vees.
+
+	vees := Array new: num_verts.
+	verts_sml withIndexDo: [ :v :i | vees at: i put: (cm xformPointLocalToWorld: v) ].
+	vees withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
+	poly_sml setVertices: vees.
+
+	^ 0
+]
+
 { #category : #respiration }
 Cursoresque >> inhale: ratch atTime: thyme [
 	| vees |
 
-	super inhale: ratch atTime: thyme.
+"	super inhale: ratch atTime: thyme.
 
 	vees := Array new: num_verts.
 	verts_lrg withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
@@ -54,7 +71,7 @@ Cursoresque >> inhale: ratch atTime: thyme [
 	vees := Array new: num_verts.
 	verts_sml withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
 	poly_sml setVertices: vees.
-
+"
 	^ 0
 ]
 
