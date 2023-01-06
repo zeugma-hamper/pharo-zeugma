@@ -8,9 +8,8 @@ RecursiveLimner >> recursivelyDraw: zeub atRatchet: ratch withCumuMats: cm_above
 	| cm |
 
 	cm := cm_above.
-	zeub isZeugmallyLimnable ifTrue: [ | lcl_cm |
-		(lcl_cm := zeub currentCumuMats)
-			ifNotNil: [ cm := lcl_cm dependCumuMatsFrom: cm ]. 
+	zeub isZeugmallyLimnable ifTrue: [
+		cm := zeub dependCumuMatsFrom: cm. 
 		zeub drawSelfAtRatch: ratch withCumuMats: cm andAdjColor: adjc_above.
 	].
 

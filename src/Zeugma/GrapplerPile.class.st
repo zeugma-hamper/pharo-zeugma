@@ -56,10 +56,10 @@ GrapplerPile >> inhale: ratch atTime: thyme [
 
 	gr := graps at: 1.
 	gr inhale: ratch atTime: thyme.
-	pm := gr pntMat.
-	ipm := gr invPntMat.
-	nm := gr nrmMat.
-	inm := gr invNrmMat.
+	pm := gr pntMat dup.
+	ipm := gr invPntMat dup.
+	nm := gr nrmMat dup.
+	inm := gr invNrmMat dup.
 
 	2 to: num do: [ :q |
 		gr := graps at: q.

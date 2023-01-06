@@ -41,18 +41,18 @@ Cursoresque class >> newOfSize: sz [
 	^ self new: 6 size: sz
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #drawing }
 Cursoresque >> drawSelfAtRatch: ratch withCumuMats: cm andAdjColor: adjc [
 	| vees |
 
 	vees := Array new: num_verts.
-	verts_lrg withIndexDo: [ :v :i | vees at: i put: (cm xformPointLocalToWorld: v) ].
-	vees withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
+	verts_lrg withIndexDo: [ :vzft :i | vees at: i put: (cm xformPointLocalToWorld: vzft val) ].
+	vees withIndexDo: [ :v :i | vees at: i put: ((v x) @ (v y)) ].
 	poly_lrg setVertices: vees.
 
 	vees := Array new: num_verts.
-	verts_sml withIndexDo: [ :v :i | vees at: i put: (cm xformPointLocalToWorld: v) ].
-	vees withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
+	verts_sml withIndexDo: [ :vzft :i | vees at: i put: (cm xformPointLocalToWorld: vzft val) ].
+	vees withIndexDo: [ :v :i | vees at: i put: ((v x) @ (v y)) ].
 	poly_sml setVertices: vees.
 
 	^ 0
@@ -62,8 +62,8 @@ Cursoresque >> drawSelfAtRatch: ratch withCumuMats: cm andAdjColor: adjc [
 Cursoresque >> inhale: ratch atTime: thyme [
 	| vees |
 
-"	super inhale: ratch atTime: thyme.
-
+	super inhale: ratch atTime: thyme.
+"
 	vees := Array new: num_verts.
 	verts_lrg withIndexDo: [ :v :i | vees at: i put: ((v val x) @ (v val y)) ].
 	poly_lrg setVertices: vees.

@@ -49,6 +49,30 @@ CumuMats >> initialize [
 	rat_fresh := -1.
 ]
 
+{ #category : #'matrix-access' }
+CumuMats >> invNrmMat [
+
+	^ inmat
+]
+
+{ #category : #'matrix-access' }
+CumuMats >> invPntMat [
+
+	^ ipmat
+]
+
+{ #category : #'matrix-access' }
+CumuMats >> nrmMat [
+
+	^ nmat
+]
+
+{ #category : #'matrix-access' }
+CumuMats >> pntMat [
+
+	^ pmat
+]
+
 { #category : #transforming }
 CumuMats >> xformPointLocalToWorld: p [
 
