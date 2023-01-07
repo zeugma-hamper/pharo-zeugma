@@ -116,3 +116,9 @@ Zoft >> val [
 
 	^ val
 ]
+
+{ #category : #accessing }
+Zoft >> value [
+
+	^ val
+]
