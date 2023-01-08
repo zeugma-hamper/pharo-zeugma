@@ -67,6 +67,30 @@ Bolex >> nearClipDistZoft [
 	^ near_clip_dst
 ]
 
+{ #category : #'derived-matrices' }
+Bolex >> projectionMatrix [
+	| emm vdst wid hei ms |
+
+	vdst := self viewDist.
+	emm := Matrix44 shearXbyY: 0.0 XbyZ: self viewPlaneHorizOffset / vdst
+							YbyX: 0.0 YbyZ: self viewPlaneVertOffset / vdst
+							ZbyX: 0.0 ZbyY: 0.0.
+
+	self projectionTypeIsOrthographic
+		ifTrue: [
+			wid := self viewOrthoWid.
+			hei := self viewOrthoHei.
+		]
+		ifFalse: [
+			wid := (0.5 * self viewHorizAngle * Float pi) tan * 2.0 * vdst.
+			hei := (0.5 * self viewVertAngle * Float pi) tan * 2.0 * vdst.
+		].
+	ms := Matrix44 scaleX: (2.0 / wid) Y: (2.0 / hei) Z: 0.0.
+
+	emm multAccum: ms.
+	^ emm
+]
+
 { #category : #'camera-params' }
 Bolex >> projectionType [
 
@@ -234,6 +258,24 @@ Bolex >> viewLoc [
 Bolex >> viewLocZoft [
 
 	^ view_loc
+]
+
+{ #category : #'derived-matrices' }
+Bolex >> viewMatrix [
+	| mt aim up ovr mc |
+
+	mt := Matrix44 translation: self viewLoc negated.
+	aim := self viewAim normed.
+	up := self viewUp normed.
+	(aim dot: up  >  0.9999999)
+		ifTrue: [ self error: 'well, heck. camera''s aim and up vectors can''t be parallel.' ].
+
+	ovr := (aim cross: up) normed.
+	up := ovr cross: aim.
+	mc := Matrix44 backwardCoordTransformPreNormedOver: ovr up: up norm: aim negated.
+
+	mt multAccum: mc.
+	^ mt
 ]
 
 { #category : #'camera-params' }

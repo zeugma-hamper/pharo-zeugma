@@ -7,6 +7,54 @@ Class {
 	#category : #'Zeugma-Foundation'
 }
 
+{ #category : #'transformations-coord' }
+Matrix44 class >> backwardCoordTransformOver: o up: u [
+
+	^ self basicNew loadBackwardCoordTransformOver: o up: u
+]
+
+{ #category : #'transformations-coord' }
+Matrix44 class >> backwardCoordTransformOver: o up: u norm: n [
+
+	^ self basicNew loadBackwardCoordTransformOver: o up: u norm: n
+]
+
+{ #category : #'transformations-coord' }
+Matrix44 class >> backwardCoordTransformPreNormedOver: o up: u [
+
+	^ self basicNew loadBackwardCoordTransformPreNormedOver: o up: u
+]
+
+{ #category : #'transformations-coord' }
+Matrix44 class >> backwardCoordTransformPreNormedOver: o up: u norm: n [
+
+	^ self basicNew loadBackwardCoordTransformPreNormedOver: o up: u norm: n
+]
+
+{ #category : #'transformations-coord' }
+Matrix44 class >> forwardCoordTransformOver: o up: u [
+
+	^ self basicNew loadForwardCoordTransformOver: o up: u
+]
+
+{ #category : #'transformations-coord' }
+Matrix44 class >> forwardCoordTransformOver: o up: u norm: n [
+
+	^ self basicNew loadForwardCoordTransformOver: o up: u norm: n
+]
+
+{ #category : #'transformations-coord' }
+Matrix44 class >> forwardCoordTransformPreNormedOver: o up: u [
+
+	^ self basicNew loadForwardCoordTransformPreNormedOver: o up: u
+]
+
+{ #category : #'transformations-coord' }
+Matrix44 class >> forwardCoordTransformPreNormedOver: o up: u norm: n [
+
+	^ self basicNew loadForwardCoordTransformPreNormedOver: o up: u norm: n
+]
+
 { #category : #'instance creation' }
 Matrix44 class >> newFrom: arr [
 
@@ -319,7 +367,7 @@ Matrix44 >> loadAtopIdentTranslationX: tx Y: ty Z: tz [
 
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadBackwardCoordTransformOver: o up: u [
 	| on un |
 
@@ -328,19 +376,19 @@ Matrix44 >> loadBackwardCoordTransformOver: o up: u [
 	self loadBackwardCoordTransformPreNormedOver: on up: un norm: (on cross: un)
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadBackwardCoordTransformOver: o up: u norm: n [
 
 	self loadBackwardCoordTransformPreNormedOver: o normed up: u normed norm: n normed
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadBackwardCoordTransformPreNormedOver: o up: u [
 
 	self loadBackwardCoordTransformPreNormedOver: o up: u norm: (o cross: u)
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadBackwardCoordTransformPreNormedOver: o up: u norm: n [
 
 	self loadIdent.
@@ -350,7 +398,7 @@ Matrix44 >> loadBackwardCoordTransformPreNormedOver: o up: u norm: n [
 		m20: o z;  m21: u z;  m22: n z.
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadForwardCoordTransformOver: o up: u [
 	| on un |
 
@@ -359,19 +407,19 @@ Matrix44 >> loadForwardCoordTransformOver: o up: u [
 	self loadForwardCoordTransformPreNormedOver: on up: un norm: (on cross: un)
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadForwardCoordTransformOver: o up: u norm: n [
 
 	self loadForwardCoordTransformPreNormedOver: o normed up: u normed norm: n normed
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadForwardCoordTransformPreNormedOver: o up: u [
 
 	self loadForwardCoordTransformPreNormedOver: o up: u norm: (o cross: u)
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #'transformations-coord' }
 Matrix44 >> loadForwardCoordTransformPreNormedOver: o up: u norm: n [
 
 	self loadIdent.
@@ -388,13 +436,13 @@ Matrix44 >> loadIdent [
 	^ self
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadRotationAxis: axs angle: ang [
 
 	^ self loadRotationNormedAxis: (axs normed) angle: ang
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadRotationAxis: axs angle: ang about: cnt [
 	| emm |
 
@@ -405,7 +453,7 @@ Matrix44 >> loadRotationAxis: axs angle: ang about: cnt [
 	^ self
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadRotationNormedAxis: axs angle: ang [
 
 	| co si omc t1 t2 a00 a11 a22 a10 a01 a20 a02 a21 a12 |
@@ -438,7 +486,7 @@ Matrix44 >> loadRotationNormedAxis: axs angle: ang [
 		}
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadRotationNormedAxis: axs angle: ang about: cnt [
 	| emm |
 
@@ -449,7 +497,7 @@ Matrix44 >> loadRotationNormedAxis: axs angle: ang about: cnt [
 	^ self
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadScale: s [
 
 	s isNumber ifFalse: [ ^ self loadScaleX: s x Y: s y Z: s z ].
@@ -461,7 +509,7 @@ Matrix44 >> loadScale: s [
 
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadScale: s about: cnt [
 	| t |
 
@@ -479,7 +527,7 @@ Matrix44 >> loadScale: s about: cnt [
 
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadScaleX: sx Y: sy Z: sz [
 
 	self loadIdent;
@@ -489,7 +537,7 @@ Matrix44 >> loadScaleX: sx Y: sy Z: sz [
 
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadScaleX: sx Y: sy Z: sz about: cnt [
 
 	self loadIdent.
@@ -502,7 +550,7 @@ Matrix44 >> loadScaleX: sx Y: sy Z: sz about: cnt [
 
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadShearXbyY: xy XbyZ: xz YbyX: yx YbyZ: yz ZbyX: zx ZbyY: zy [
 
 	self loadIdent;
@@ -511,7 +559,7 @@ Matrix44 >> loadShearXbyY: xy XbyZ: xz YbyX: yx YbyZ: yz ZbyX: zx ZbyY: zy [
 		m21: yz;  m12: zy.
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadShearXbyY: xy XbyZ: xz YbyX: yx YbyZ: yz ZbyX: zx ZbyY: zy about: cnt [
 	| emm |
 
@@ -523,7 +571,7 @@ Matrix44 >> loadShearXbyY: xy XbyZ: xz YbyX: yx YbyZ: yz ZbyX: zx ZbyY: zy about
 	self multAccum: emm.
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadTranslation: v [
 
 	self loadIdent;
@@ -533,7 +581,7 @@ Matrix44 >> loadTranslation: v [
 
 ]
 
-{ #category : #'affineish-transformations' }
+{ #category : #transformations }
 Matrix44 >> loadTranslationX: tx Y: ty Z: tz [
 
 	self loadIdent;
