@@ -5,7 +5,7 @@ Class {
 		'chirrens'
 	],
 	#classVars : [
-		'empty_kid_coll'
+		'C_empty_kid_coll'
 	],
 	#category : #'Zeugma-Foundation'
 }
@@ -13,7 +13,7 @@ Class {
 { #category : #initialization }
 PouchyThing class >> initialize [
 
-	empty_kid_coll := OrderedCollection new.
+	C_empty_kid_coll := OrderedCollection new.
 ]
 
 { #category : #children }
@@ -29,7 +29,7 @@ PouchyThing >> appendChild: zeub [
 PouchyThing >> children [
 
 	^ chirrens
-		ifNil: [ empty_kid_coll ]
+		ifNil: [ C_empty_kid_coll ]
 		ifNotNil: [ chirrens ].
 ]
 

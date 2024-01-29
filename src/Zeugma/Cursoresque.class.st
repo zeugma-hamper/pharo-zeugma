@@ -9,7 +9,7 @@ Class {
 		'poly_sml'
 	],
 	#classVars : [
-		'randy'
+		'C_randy'
 	],
 	#category : #'Zeugma-UI'
 }
@@ -17,7 +17,7 @@ Class {
 { #category : #'class initialization' }
 Cursoresque class >> initialize [
 
-	randy := Random new.
+	C_randy := Random new.
 ]
 
 { #category : #'instance creation' }
@@ -97,7 +97,7 @@ Cursoresque >> initialize: nVerts size: sz [
 				* 0.5 * (0.85 * w + 1).
 			arm := SinuZoft
 				newWithAmplitude: radial * sz * 0.065
-				andFrequency: 0.8 + (0.11 * randy next)
+				andFrequency: 0.8 + (0.11 * C_randy next)
 				andCenter: radial * sz * 0.24 * (1 + (3 * (q % 2))).
 			(w > 0  ifTrue: [ verts_lrg ]  ifFalse: [ verts_sml ])
 				at: q+1 put: arm.

@@ -7,7 +7,7 @@ Class {
 		'expirees'
 	],
 	#classVars : [
-		'globalIronLungs'
+		'C_globalIronLungs'
 	],
 	#category : #'Zeugma-TemporalStructure'
 }

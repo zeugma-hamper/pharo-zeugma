@@ -197,7 +197,7 @@ Matrix44 >> addAccum: b [
 { #category : #initialization }
 Matrix44 >> alloc16 [
 
-	m := FloatArray new: 16.
+	m := Float64Array new: 16.
 	^ self
 ]
 
@@ -222,7 +222,7 @@ Matrix44 >> gutsArray [
 { #category : #initialization }
 Matrix44 >> initialize [
 
-	m := FloatArray new: 16.
+	m := Float64Array new: 16.
 	m at: 1 put: 1.0;  at: 6 put: 1.0;  at: 11 put: 1.0;  at: 16 put: 1.0.
 ]
 
@@ -835,7 +835,7 @@ Matrix44 >> preMultAccum: b [
 Matrix44 >> scale: s [
 
 	| arr |
-	arr := FloatArray basicNew: 16.
+	arr := Float64Array basicNew: 16.
 	m withIndexDo: [ :val :ind | arr at: ind put: s * val ].
 	^ self class newFrom: arr
 ]
@@ -844,7 +844,7 @@ Matrix44 >> scale: s [
 Matrix44 >> scaleAccum: s [
 
 	| arr |
-	arr := FloatArray basicNew: 16.
+	arr := Float64Array basicNew: 16.
 	m withIndexDo: [ :val :ind | arr at: ind put: s * val ].
 	self setGutsArray: arr.
 	^ self

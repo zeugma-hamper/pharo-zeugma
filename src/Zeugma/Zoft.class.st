@@ -6,7 +6,7 @@ Class {
 		'guts'
 	],
 	#classVars : [
-		'default_lung'
+		'C_default_lung'
 	],
 	#category : #'Zeugma-Zofts'
 }
@@ -14,7 +14,7 @@ Class {
 { #category : #respiration }
 Zoft class >> defaultLung [
 
-	^ default_lung
+	^ C_default_lung
 ]
 
 { #category : #creating }
@@ -41,15 +41,15 @@ Zoft class >> privateNew [
 	| novo |
 
 	novo := super new.
-	default_lung ifNotNil:
-		[ default_lung appendBreathee: novo ].
+	C_default_lung ifNotNil:
+		[ C_default_lung appendBreathee: novo ].
 	^ novo
 ]
 
 { #category : #respiration }
 Zoft class >> setDefaultLung: pulmo [
 
-	default_lung := pulmo
+	C_default_lung := pulmo
 ]
 
 { #category : #promoting }

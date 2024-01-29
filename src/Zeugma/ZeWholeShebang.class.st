@@ -40,7 +40,7 @@ Class {
 		'auto_attend'
 	],
 	#classVars : [
-		'canonical_instance'
+		'C_canonical_instance'
 	],
 	#category : #'Zeugma-TemporalStructure'
 }
@@ -48,9 +48,9 @@ Class {
 { #category : #'instance creation' }
 ZeWholeShebang class >> canonicalInstance [
 
-	canonical_instance
-		ifNil: [ canonical_instance := self newDefaultInstance ].
-	^ canonical_instance
+	C_canonical_instance
+		ifNil: [ C_canonical_instance := self newDefaultInstance ].
+	^ C_canonical_instance
 ]
 
 { #category : #'instance creation' }

@@ -8,7 +8,7 @@ Class {
 		'fore_evt'
 	],
 	#classVars : [
-		'deliv_selector'
+		'C_deliv_selector'
 	],
 	#category : #'Zeugma-Events'
 }
